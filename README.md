@@ -59,6 +59,8 @@ npx expo export --platform all
 
 A exportação verifica os bundles JavaScript; não gera binários para as lojas nem substitui testes em dispositivos.
 
+Para compilar e instalar no seu iPhone pelo Mac com uma conta Apple gratuita, veja [testes locais no iOS](docs/ios-local-testing.md). O identificador inicial de iOS é `com.gabrielguerguen.goakit`. O comando `npm run ios:device` usa configuração Release, com o código da interface incluído no aplicativo; depende de Xcode, CocoaPods, assinatura e aparelho preparados.
+
 ## Novos componentes
 
 Antes de adicionar componentes, confirme uma versão do CLI Gluestack compatível com a stack instalada e use o comando `add` dessa versão. Revise o diff gerado; não atualize a stack implicitamente para adicionar um componente.
