@@ -1,6 +1,22 @@
 # Goakit
 
-Aplicativo para Android, iOS e web com Expo, React Native, TypeScript e Gluestack UI.
+Aplicativo de checklists para festivais de música, com foco inicial em psytrance, para Android e iOS. Base técnica com Expo, React Native, TypeScript e Gluestack UI. O suporte web existente serve para prévia de desenvolvimento; um aplicativo web completo está fora do escopo.
+
+## Momento do projeto
+
+Estamos preparando a fundamentação. A implementação das telas aguarda os designs de Gabriel no Paper. A tela atual é somente o exemplo técnico do setup, não a interface do produto.
+
+A próxima etapa será uma interface navegável com dados fictícios e estado em memória. Conta, links, publicação e estados offline serão simulados. Não há backend, persistência ou integrações reais; Bruno cuidará da infraestrutura posteriormente.
+
+## Fundamentação
+
+- [Produto e recorte atual](docs/product.md)
+- [Organização, tipos e fronteiras técnicas](docs/architecture.md)
+- [Decisões confirmadas, propostas e questões abertas](docs/decisions.md)
+- [Sequência de entrega, cenários de aceite e passagem para Bruno](docs/delivery.md)
+- [Instruções para desenvolvimento com IA](AGENTS.md)
+
+O [briefing principal](https://docs.google.com/document/d/1bDFO0IcOABNzh1txCChQS_F3TNGzH141BjY0kG8kkes/edit) orienta o produto. A documentação local distingue o produto final do protótipo atual.
 
 ## Começar
 
@@ -25,6 +41,8 @@ npm run web
 - `components/ui/`: componentes Gluestack que podem ser personalizados.
 - `global.css`: estilos e tokens do tema.
 - `assets/`: imagens e ícones.
+- `src/types/`: tipos preliminares, ainda sem comportamento conectado à UI.
+- `docs/`: fundamentação e planejamento; a estrutura futura está documentada em `docs/architecture.md`.
 - `.github/workflows/ci.yml`: verificações automáticas de tipos, dependências e geração dos bundles.
 
 ## Verificação
@@ -39,11 +57,9 @@ A exportação verifica os bundles JavaScript; não gera binários para as lojas
 
 ## Novos componentes
 
-```sh
-npx gluestack-ui@latest add input
-```
+Antes de adicionar componentes, confirme uma versão do CLI Gluestack compatível com a stack instalada e use o comando `add` dessa versão. Revise o diff gerado; não atualize a stack implicitamente para adicionar um componente.
 
-O instalador atual utiliza Gluestack UI v5 alpha e NativeWind v5. As versões resolvidas estão registradas no `package-lock.json`; use `npm ci` para reproduzir a instalação.
+O setup utiliza Gluestack UI v5 (apresentado como alpha pelo instalador) e NativeWind v5 preview. As versões resolvidas estão registradas no `package-lock.json`; use `npm ci` para reproduzir a instalação. NativeWind é o sistema de estilos existente; UniWind não está instalado. Expo Router permanece uma proposta.
 
 ## Configuração
 
