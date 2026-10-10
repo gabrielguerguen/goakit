@@ -4,8 +4,8 @@
 
 - Leia `docs/product.md`, `docs/architecture.md`, `docs/decisions.md` e `docs/delivery.md` antes de alterar funcionalidades.
 - O briefing principal está linkado em `docs/product.md`. Instruções explícitas atuais de Gabriel delimitam a entrega e prevalecem sobre propostas técnicas.
-- Gabriel pediu para aguardar as telas do Paper antes de implementar a UI. Não invente telas, identidade visual ou fluxos novos enquanto esse material não chegar. A tela do setup não é design aprovado do produto.
-- A próxima fase é interface com dados simulados e estado em memória. Não adicione backend, persistência, autenticação real, links públicos ou integrações sem nova autorização de escopo. Bruno é responsável pela infraestrutura futura.
+- As telas do Paper foram recebidas; referência e primeiro recorte estão em `docs/implementation.md`. Consulte o material antes de ampliar a UI. Não invente identidade visual ou fluxos novos; a tela antiga do setup não era design aprovado do produto.
+- A fase atual é interface com dados simulados e estado em memória. Não adicione backend, persistência, autenticação real, links públicos ou integrações sem nova autorização de escopo. Bruno é responsável pela infraestrutura futura.
 
 ## Stack e organização
 
@@ -14,7 +14,7 @@
 - Expo Router é proposta, não dependência instalada. Não migre a entrada sem registrar a decisão.
 - Consulte `components/ui/` antes de criar componentes. Mantenha telas/lógica por feature, dados fictícios centralizados em `src/mocks/` quando necessários e tipos em `src/types/`.
 - Não concentre toda a aplicação em `App.tsx`. Não crie abstrações de backend ou pastas vazias preventivamente.
-- Tokens de cores existentes estão em `global.css`; não duplique seus valores em componentes. Escalas de tipografia, espaçamento, formas e estados serão refinadas com Paper. Prefira papéis semânticos e variantes reutilizáveis.
+- Tokens de cores existentes estão em `global.css`; não duplique seus valores em componentes. A escala inicial do Paper está em `src/theme/patterns.ts` e `docs/implementation.md`. Prefira papéis semânticos e variantes reutilizáveis.
 
 ## Invariantes
 
