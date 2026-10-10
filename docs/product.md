@@ -4,7 +4,7 @@
 
 Referência principal: [Briefing app checklists para festivais](https://docs.google.com/document/d/1bDFO0IcOABNzh1txCChQS_F3TNGzH141BjY0kG8kkes/edit), de Gabriel Guerguen, consultado em 10/10/2026. O briefing orienta o produto; as instruções de Gabriel nesta conversa delimitam a entrega atual. Este documento é uma síntese de trabalho, não uma cópia nem uma substituição do briefing. Mudanças futuras na fonte exigem revisão desta síntese.
 
-**Agora: fundamentação, organização e tipos preliminares. A implementação das telas aguarda os arquivos de design do Paper enviados por Gabriel.**
+**Agora: primeiro bloco de UI a partir das telas do Paper recebidas: início/listas, checklist e adicionar/editar/remover itens.** Veja [estado da implementação](implementation.md). A fundamentação continua orientando os demais fluxos.
 
 **Próxima etapa: interface navegável, com dados fictícios e estado em memória.** Bruno implementará infraestrutura e integrações em uma etapa posterior. Persistência, links públicos e contas reais não fazem parte do protótipo. O critério de fechar e reabrir mantendo dados, presente no briefing, pertence ao produto final e não ao aceite desta demonstração.
 

@@ -2,9 +2,9 @@
 
 ## Entrega atual
 
-Fundamentação de produto, organização proposta, registro de decisões, instruções para continuidade e tipos preliminares. Não implementa novos fluxos, fixtures, geração de listas, filtro de privacidade, navegação, autenticação ou publicação. A tela do setup permanece como demonstração técnica.
+Fundamentação concluída e primeiro bloco de UI implementado: listas, checklist e edição de itens em memória. Veja [implementação, validação e limites](implementation.md). Geração, adaptação, filtro de privacidade, autenticação e publicação permanecem planejados.
 
-## Quando as telas do Paper chegarem
+## Sequência de implementação a partir do Paper recebido
 
 1. Relacionar cada tela e estado ao fluxo em `product.md`; identificar lacunas, perguntas abertas e componentes existentes antes de programar.
 2. Acordar decisões que afetam o primeiro fluxo: versões, navegação, campos mínimos da lista e quantidades. Registrar tokens e variantes a partir do design, mantendo a identidade provisória.

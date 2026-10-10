@@ -9,12 +9,12 @@
     "@legendapp/motion": "^2.5.3",
     "expo": "~57.0.27",
     "expo-status-bar": "~57.0.1",
-    "nativewind": "^5.0.0-preview.2",
+    "nativewind": "5.0.0-rc.0",
     "react": "19.2.3",
     "react-aria": "^3.53.1",
     "react-dom": "19.2.3",
     "react-native": "0.86.3",
-    "react-native-css": "^3.0.7",
+    "react-native-css": "3.1.0-rc.0",
     "react-native-reanimated": "4.5.1",
     "react-native-safe-area-context": "~5.7.0",
     "react-native-svg": "15.15.4",
@@ -36,7 +36,8 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "node --experimental-strip-types --test tests/*.test.mjs"
   },
   "private": true,
   "overrides": {

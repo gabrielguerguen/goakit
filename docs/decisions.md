@@ -6,7 +6,7 @@ Estado em 10/10/2026. “Proposta” não significa aprovado. Registrar mudança
 
 | ID | Decisão | Consequência |
 | --- | --- | --- |
-| D01 | Aguardar telas do Paper antes de implementar a UI | Esta entrega altera documentação e tipos, não telas |
+| D01 | Aguardar telas do Paper antes de implementar a UI | Material recebido; implementação iniciada com telas 01, 02, 07, 08 e 09 |
 | D02 | Protótipo futuro com dados fictícios e estado local em memória | Sem backend, persistência ou serviços reais |
 | D03 | Progresso binário e pessoal | Sem etapas comprar/separar/embalar e sem colaboração |
 | D04 | Cópias independentes | Alterações em qualquer direção não propagam entre listas |
@@ -40,6 +40,14 @@ Manter o setup existente de Expo + TypeScript + Gluestack + NativeWind, sem segu
 | Q15 | Desfazer e cancelamento | Definir exclusão, retorno durante quiz e saída de revisão com propostas pendentes | Design dos estados; Gabriel |
 
 ## Como tratar questões abertas
+
+### Escolhas temporárias do primeiro bloco
+
+- Navegação local tipada, sem Expo Router, para home/checklist/editor. Q11 permanece aberta para evolução.
+- Quantidades inteiras de 1 a 999, editadas com stepper conforme referência, como hipótese de demonstração (Q04), sem regras de geração.
+- Salvar confirma o rascunho; cancelar/voltar descarta somente esse rascunho. Exclusão pede confirmação (Q15).
+- Fixtures têm visibilidade explícita e hipotética. Novos itens usam `inherit` como marcador sem executar filtro público; listas vazias de teste usam categorias ocultas. Q01/Q02 não foram resolvidas como política de produto, e não há compartilhamento nesta entrega.
+- NativeWind RC0 alinhado ao peer `react-native-css` RC0 após falha observada na prévia web. Q12 permanece aberta para estabilização antes de distribuição.
 
 Não ocultar uma proposta em um default de código. Antes de implementar comportamento dependente, registrar a decisão ou um acordo explicitamente temporário para o cenário demonstrativo. A UI pode avançar em partes independentes, sem transformar a dúvida em bloqueio de todo o projeto.
 

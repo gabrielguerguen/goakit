@@ -6,7 +6,9 @@ O repositório contém Expo SDK 57, React Native, TypeScript em modo estrito, Gl
 
 Manter NativeWind como único sistema principal de estilos nesta base, sem adicionar UniWind em paralelo. Essa escolha aproveita o setup existente e é revisável. Antes das telas, avaliar com Gabriel a permanência nas versões preliminares; uma migração precisa de validação própria. Não atualizar dependências ou executar instaladores `@latest` como parte de uma alteração visual rotineira.
 
-Expo Router é recomendado para avaliar quando o mapa de telas chegar. Ainda não está instalado nem aprovado como decisão. Até lá, `App.tsx` e a tela demonstrativa do setup permanecem intactos.
+O primeiro bloco usa navegação de estado local com rotas tipadas em `ChecklistApp`, incluindo retorno Android. Isso mantém o fluxo testável sem antecipar Expo Router. Router permanece uma opção para os próximos blocos; não está instalado. `App.tsx` contém somente providers e a entrada da feature.
+
+Na implementação, o NativeWind já resolvido como `5.0.0-rc.0` foi fixado junto de `react-native-css@3.1.0-rc.0`, exigido em seu peer dependency. O preset legado `nativewind/babel` foi removido, mantendo o preset Expo e a integração Metro; a duplicação de transformação impedia abrir a prévia web. Os tokens usam tema claro conforme Paper, sem seletores `:root.light`/`:root.dark` incompatíveis com o compilador nativo atual. Não houve troca de motor ou atualização do Expo. Referência: [instalação NativeWind v5](https://www.nativewind.dev/v5/getting-started/installation).
 
 ## Estrutura incremental
 
@@ -16,10 +18,10 @@ Expo Router é recomendado para avaliar quando o mapa de telas chegar. Ainda nã
 | `components/ui/` | Componentes Gluestack instalados | Manter caminho atual para evitar migração sem benefício |
 | `global.css` | Tokens de cor e configuração NativeWind | Existente; valores não são identidade visual aprovada |
 | `src/types/` | Tipos preliminares do domínio e demonstração | Adicionados nesta fundamentação |
-| `src/features/` | Telas, estado e lógica de apresentação por funcionalidade | Criar quando houver implementação |
-| `src/components/checklist/` | Componentes específicos reutilizáveis | Criar a partir das telas do Paper |
-| `src/mocks/` | Catálogo, cenários e operações simuladas | Criar junto ao primeiro fluxo funcional |
-| `src/theme/` | Escalas e convenções compartilhadas além das cores | Criar após mapear o design; evitar duplicar `global.css` |
+| `src/features/` | Telas, estado e lógica de apresentação por funcionalidade | Primeiro fluxo em `checklists/` |
+| `src/components/checklist/` | Componentes específicos reutilizáveis | Item e seção do checklist |
+| `src/mocks/` | Catálogo, cenários e operações simuladas | Fixtures renovadas a cada reset |
+| `src/theme/` | Escalas e convenções compartilhadas além das cores | `patterns.ts` documenta a escala do Paper |
 | `app/` | Rotas e layouts finos | Criar somente se Expo Router for adotado |
 | `docs/` | Produto, decisões, arquitetura e plano de validação | Documentação de continuidade |
 

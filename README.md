@@ -4,9 +4,9 @@ Aplicativo de checklists para festivais de música, com foco inicial em psytranc
 
 ## Momento do projeto
 
-Estamos preparando a fundamentação. A implementação das telas aguarda os designs de Gabriel no Paper. A tela atual é somente o exemplo técnico do setup, não a interface do produto.
+O primeiro bloco de interface foi implementado a partir do Paper: Minhas listas, estado vazio, checklist, adicionar/editar/remover itens e progresso. Veja [como testar e limites da entrega](docs/implementation.md).
 
-A próxima etapa será uma interface navegável com dados fictícios e estado em memória. Conta, links, publicação e estados offline serão simulados. Não há backend, persistência ou integrações reais; Bruno cuidará da infraestrutura posteriormente.
+A interface usa dados fictícios e estado em memória. Quiz, reaproveitamento, privacidade e compartilhamento são próximos blocos, ainda indisponíveis. Não há backend, persistência ou integrações reais; Bruno cuidará da infraestrutura posteriormente.
 
 ## Fundamentação
 
@@ -37,18 +37,22 @@ npm run web
 
 ## Estrutura
 
-- `App.tsx`: entrada e tela inicial.
+- `App.tsx`: providers e entrada da aplicação.
 - `components/ui/`: componentes Gluestack que podem ser personalizados.
 - `global.css`: estilos e tokens do tema.
 - `assets/`: imagens e ícones.
-- `src/types/`: tipos preliminares, ainda sem comportamento conectado à UI.
-- `docs/`: fundamentação e planejamento; a estrutura futura está documentada em `docs/architecture.md`.
+- `src/types/`: tipos preliminares usados pelas telas e pelo estado local.
+- `src/features/checklists/`: telas, navegação e regras locais do primeiro fluxo.
+- `src/components/`: componentes reutilizáveis do aplicativo.
+- `src/mocks/` e `src/theme/`: dados fictícios e padrões visuais do Paper.
+- `docs/`: fundamentação, implementação e planejamento.
 - `.github/workflows/ci.yml`: verificações automáticas de tipos, dependências e geração dos bundles.
 
 ## Verificação
 
 ```sh
 npm run typecheck
+npm test
 npx expo install --check
 npx expo export --platform all
 ```
@@ -59,7 +63,7 @@ A exportação verifica os bundles JavaScript; não gera binários para as lojas
 
 Antes de adicionar componentes, confirme uma versão do CLI Gluestack compatível com a stack instalada e use o comando `add` dessa versão. Revise o diff gerado; não atualize a stack implicitamente para adicionar um componente.
 
-O setup utiliza Gluestack UI v5 (apresentado como alpha pelo instalador) e NativeWind v5 preview. As versões resolvidas estão registradas no `package-lock.json`; use `npm ci` para reproduzir a instalação. NativeWind é o sistema de estilos existente; UniWind não está instalado. Expo Router permanece uma proposta.
+O setup utiliza Gluestack UI v5 (apresentado como alpha pelo instalador). NativeWind `5.0.0-rc.0` e `react-native-css@3.1.0-rc.0` estão fixados como par compatível de versões preliminares. As versões resolvidas estão registradas no `package-lock.json`; use `npm ci` para reproduzir a instalação. UniWind não está instalado. O primeiro bloco usa navegação local; Expo Router permanece uma proposta.
 
 ## Configuração
 
