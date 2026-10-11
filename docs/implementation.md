@@ -1,45 +1,45 @@
-# Primeiro bloco — listas e checklist
+# First block — lists and checklist
 
-## Referências
+## References
 
-[Paper: wireframes e wireflows](https://app.paper.design/file/01M4KR6Y8Z07QQ9QRST4MB8DEP/p-1-0), consultado nesta implementação. Primeiro recorte: 01 início vazio, 02 minhas listas, 07 checklist, 08 adicionar e 09 editar. Estilos obtidos do JSX exportado do Paper; não estimados de screenshots.
+[Paper: wireframes and wireflows](https://app.paper.design/file/01M4KR6Y8Z07QQ9QRST4MB8DEP/p-1-0), consulted during this implementation. First scope: 01 empty home, 02 my lists, 07 checklist, 08 add, and 09 edit. Styles came from Paper's exported JSX, rather than estimates from screenshots.
 
-O HTML `prototipo-checklists-festivais.html` enviado por Gabriel orienta interações. Suas escolhas de localStorage, URL contendo payload, exportação real e defaults de privacidade não foram transportadas para o app. As notas “FLUXO/PROPOSTA” dos wireframes são documentação, não conteúdo das telas.
+The `prototipo-checklists-festivais.html` file provided by Gabriel guides interactions. Its choices of localStorage, URLs containing payloads, real exports, and privacy defaults were not carried into the app. The wireframes' “FLUXO/PROPOSTA” notes are documentation, not screen content.
 
-## O que funciona
+## What works
 
-- Duas listas fictícias independentes: Festival da Serra (8/24) e Festival do Vale (18/18).
-- Abrir listas, marcar/desmarcar itens, filtros Todos/Pendentes/Concluídos, recolher categorias e progresso derivado dos itens.
-- Adicionar/editar nome, quantidade e categoria; rascunho separado, cancelamento sem aplicar; validação de nome e quantidade.
-- Remover com confirmação. Remover o último item produz estado vazio com progresso 0 de 0.
-- Voltar à home atualiza contadores. Retorno físico Android é tratado; não há rotas públicas/deep links.
-- Controles de demonstração na home para começar sem listas, restaurar exemplos e criar uma lista vazia de teste. Troca de cenário destrutiva pede confirmação.
+- Two independent mock lists: Festival da Serra (8/24) and Festival do Vale (18/18).
+- Opening lists, checking/unchecking items, Todos/Pendentes/Concluídos (All/Pending/Completed) filters, collapsing categories, and progress derived from items.
+- Adding/editing names, quantities, and categories; separate drafts, cancellation without applying changes, and name/quantity validation.
+- Removal with confirmation. Removing the last item produces an empty state with 0 of 0 progress.
+- Returning home updates counters. Android hardware back is handled; there are no public routes/deep links.
+- Home demonstration controls to start without lists, restore examples, and create an empty test list. Destructive scenario changes require confirmation.
 
-Quiz, reaproveitamento e compartilhar aparecem indisponíveis com explicação do próximo bloco. Nenhum botão anuncia publicação ou integração inexistente. O cenário vazio pode ser explorado e revertido pelos controles de teste.
+Quiz, reuse, and sharing are unavailable with an explanation of the next block. No button announces a nonexistent publication or integration. The empty scenario can be explored and reversed through test controls.
 
-## Organização
+## Organization
 
-`src/features/checklists/` separa estado/navegação, telas e reducer. `src/components/checklist/` contém item e seção reutilizáveis. `src/components/shared/` contém botões, cabeçalho, notas e diálogo. `src/mocks/` fabrica fixtures novas a cada reset; não é catálogo final. `src/theme/patterns.ts` reúne a escala extraída do Paper, usando cores semânticas de `global.css` e NativeWind.
+`src/features/checklists/` separates state/navigation, screens, and the reducer. `src/components/checklist/` contains reusable items and sections. `src/components/shared/` contains buttons, headings, notes, and dialogs. `src/mocks/` creates fresh fixtures on each reset; it is not the final catalog. `src/theme/patterns.ts` collects the scale extracted from Paper, using semantic colors from `global.css` and NativeWind.
 
-Escala inicial: título 28/36, título de card 20/28, seção 18/26, corpo 16/24 e legenda/label 14/22. Margem horizontal 24, gap principal 16, raio de controles 8, botão mínimo 48. Alvos de interação menores do wireframe foram ampliados para pelo menos 44; não há barra de status desenhada, pois o sistema fornece a real.
+Initial scale: title 28/36, card title 20/28, section 18/26, body 16/24, and caption/label 14/22. Horizontal padding 24, main gap 16, control radius 8, minimum button height 48. Smaller interaction targets in the wireframes were enlarged to at least 44; no status bar is drawn because the system supplies the real one.
 
-As categorias privadas do exemplo não são uma política aprovada: não existe filtro público nesta entrega. Os marcadores de visibilidade são preservados na edição e não são enviados a lugar algum.
+The example's private categories are not an approved policy: there is no public filter in this delivery. Visibility markers are preserved during editing and are not sent anywhere.
 
-## Como experimentar
+## Trying it out
 
-Execute os comandos do README. Abra Festival da Serra, marque Barraca, filtre Pendentes e edite Lanterna. Altere nome/quantidade/categoria e salve; depois experimente cancelar outra edição. Na home, abra os controles para testar estado sem listas ou uma lista vazia, adicionar um item e removê-lo.
+Run the README commands. Open Festival da Serra, toggle Barraca, filter Pendentes, and edit Lanterna. Change the name/quantity/category and save; then try canceling another edit. On the home screen, open the controls to test a no-lists state or an empty list, add an item, and remove it.
 
-Tudo fica em memória. Recarregar restaura os exemplos. Não há conta, armazenamento, rede de aplicação, backup, sincronização ou geração contextual.
+Everything stays in memory. Reloading restores the examples. There are no accounts, storage, application networking, backup, synchronization, or contextual generation.
 
-## Validação
+## Validation
 
-- `npm run typecheck`: tipos de telas, props e modelo.
-- `npm test`: testes de progresso binário, isolamento entre listas, edição por ID com nomes duplicados, rejeição de entradas inválidas, último item e independência dos resets.
-- `npx expo install --check` e exportação para Android, iOS e web.
-- Revisão interativa da prévia web: abertura, progresso, filtros, edição de nome/quantidade/categoria, cancelar sem aplicar, nome obrigatório, adicionar/remover último item, estado sem listas e reset ao recarregar.
+- `npm run typecheck`: screen, prop, and model types.
+- `npm test`: binary progress, isolation between lists, editing by ID with duplicate names, rejection of invalid input, the last item, and independent resets.
+- `npx expo install --check` and export for Android, iOS, and web.
+- Interactive web preview review: opening, progress, filters, editing name/quantity/category, canceling without applying, required names, adding/removing the last item, no-lists state, and reset on reload.
 
-Não afirmar testes em aparelho Android/iOS: não foram executados nesta entrega. A prévia web ajuda a revisar a UI, sem ampliar o escopo para um produto web completo. Acessibilidade em leitor de tela nativo, teclado físico e teclado virtual mobile ainda precisa de validação em aparelho.
+Do not claim Android/iOS device tests: they were not performed for this delivery. The web preview supports UI review without expanding scope to a complete web product. Native screen reader accessibility, physical keyboards, and mobile virtual keyboards still require device validation.
 
-## Continuidade com Bruno
+## Continuity with Bruno
 
-O reducer recebe ações sem serviços externos; fixtures entram apenas na composição da feature. A futura integração deve substituir a carga inicial e o envio de operações mantendo telas e componentes desacoplados. Persistência e contratos continuam abertos. Os próximos blocos são quiz/lista sugerida, depois adaptação e só então privacidade/compartilhamento simulado.
+The reducer receives actions without external services; fixtures enter only at feature composition. Future integration should replace initial loading and operation submission while keeping screens and components decoupled. Persistence and contracts remain open. The next blocks are quiz/suggested list, then adaptation, and only then simulated privacy/sharing.

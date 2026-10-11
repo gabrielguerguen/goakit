@@ -1,17 +1,17 @@
-# Testes locais no iPhone
+# Local iPhone testing
 
-O caminho atual usa Xcode no Mac e uma conta Apple gratuita (Personal Team). Não requer conta Expo/EAS nem distribui o aplicativo pelo TestFlight. A assinatura gratuita é temporária; pode ser necessário compilar e instalar novamente após sete dias.
+The current approach uses Xcode on a Mac and a free Apple account (Personal Team). It does not require an Expo/EAS account or distribute the app through TestFlight. Free signing is temporary; rebuilding and reinstalling may be necessary after seven days.
 
-## Preparação
+## Preparation
 
-1. Instalar e abrir Xcode, concluir os componentes iniciais e adicionar a conta em Settings → Apple Accounts.
-2. Conectar o iPhone por cabo, desbloquear, confiar no Mac e concluir o pareamento em Window → Devices and Simulators.
-3. Ativar Modo de Desenvolvedor no iPhone quando solicitado pelo Xcode. Isso pode exigir reiniciar e confirmar no aparelho.
-4. Instalar Node 22 e CocoaPods compatível com o Ruby disponível no Mac.
+1. Install and open Xcode, finish its initial components, and add the account in Settings → Apple Accounts.
+2. Connect the iPhone by cable, unlock it, trust the Mac, and finish pairing in Window → Devices and Simulators.
+3. Enable Developer Mode on the iPhone when Xcode requests it. This may require restarting and confirming on the device.
+4. Install Node 22 and CocoaPods compatible with the Ruby available on the Mac.
 
-## Gerar e instalar
+## Generate and install
 
-Na raiz do projeto:
+From the project root:
 
 ```sh
 npm ci
@@ -20,16 +20,16 @@ cd ios
 pod install
 ```
 
-Abra `ios/goakit.xcworkspace` no Xcode (após instalar os pods). No target goakit, em Signing & Capabilities, selecione seu Personal Team e assinatura automática. O identificador inicial é `com.gabrielguerguen.goakit`; se a Apple informar conflito, use um identificador exclusivo e atualize `app.json` para preservar a escolha.
+Open `ios/goakit.xcworkspace` in Xcode (after installing pods). In the goakit target's Signing & Capabilities settings, select your Personal Team and automatic signing. The initial identifier is `com.gabrielguerguen.goakit`; if Apple reports a conflict, use a unique identifier and update `app.json` to preserve the choice.
 
-O iPhone deve aparecer como destino de execução. Para testes sem servidor de desenvolvimento, selecione configuração Release em Product → Scheme → Edit Scheme → Run → Build Configuration e execute o aplicativo. Também existe `npm run ios:device`, que usa a configuração Release; requer que a assinatura e a conexão já estejam prontas.
+The iPhone should appear as a run destination. To test without a development server, select Release in Product → Scheme → Edit Scheme → Run → Build Configuration and run the app. There is also `npm run ios:device`, which uses Release; signing and the connection must already be ready.
 
-Não registre IDs de aparelho, certificados, credenciais ou a configuração pessoal de assinatura no Git. A pasta `ios/` gerada permanece ignorada; `app.json` é a fonte da configuração compartilhada. O prebuild não deve apagar mudanças manuais necessárias sem antes revisá-las.
+Do not record device IDs, certificates, credentials, or personal signing configuration in Git. The generated `ios/` folder remains ignored; `app.json` is the source of shared configuration. Prebuild must not erase necessary manual changes without reviewing them first.
 
-## Limites
+## Limits
 
-Em 10/10/2026, a versão Release foi compilada no Xcode 26.6 e a instalação foi confirmada no painel Devices de um iPhone 15 com iOS 26.6.2. A primeira abertura foi bloqueada pela confiança no certificado pessoal: Ajustes → Geral → VPN e Gerenciamento de Dispositivo → App de Desenvolvedor → conta Apple → Confiar. A confirmação deve ser feita pela pessoa no aparelho.
+On October 10, 2026, the Release version was compiled in Xcode 26.6 and installation was confirmed in the Devices panel for an iPhone 15 running iOS 26.6.2. The first launch was blocked by trust in the personal certificate: Settings → General → VPN & Device Management → Developer App → Apple account → Trust. Confirmation must be performed by the person on the device.
 
-Ainda é necessário confirmar abertura e interações no aparelho antes de declarar validação dos fluxos no iOS. Os dados continuam em memória e são restaurados ao reiniciar o app. Gerar arquivos nativos ou bundles não comprova instalação.
+Opening and interactions on the device still need confirmation before claiming iOS flow validation. Data remains in memory and is restored when the app restarts. Generating native files or bundles does not prove installation.
 
-Referências: [conta gratuita Apple](https://developer.apple.com/support/compare-memberships/), [builds locais Expo](https://docs.expo.dev/guides/local-app-overview/) e [Modo de Desenvolvedor](https://docs.expo.dev/guides/ios-developer-mode/).
+References: [free Apple account](https://developer.apple.com/support/compare-memberships/), [local Expo builds](https://docs.expo.dev/guides/local-app-overview/), and [Developer Mode](https://docs.expo.dev/guides/ios-developer-mode/).

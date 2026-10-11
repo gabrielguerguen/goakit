@@ -1,71 +1,71 @@
-# Organização e limites técnicos
+# Organization and technical boundaries
 
-## Base existente
+## Existing foundation
 
-O repositório contém Expo SDK 57, React Native, TypeScript em modo estrito, Gluestack UI v5 e NativeWind v5 preview. `package.json` declara dependências; `package-lock.json` registra versões resolvidas. O instalador apresenta o Gluestack como alpha. A base passou por checagem de tipos, compatibilidade Expo e geração de bundles no setup; isso não equivale a testar os fluxos do produto em aparelhos.
+The repository contains Expo SDK 57, React Native, strict TypeScript, Gluestack UI v5, and NativeWind v5 preview. `package.json` declares dependencies; `package-lock.json` records resolved versions. The installer presents Gluestack as alpha. The foundation passed type checks, Expo compatibility checks, and bundle generation during setup; this does not amount to testing product flows on devices.
 
-Manter NativeWind como único sistema principal de estilos nesta base, sem adicionar UniWind em paralelo. Essa escolha aproveita o setup existente e é revisável. Antes das telas, avaliar com Gabriel a permanência nas versões preliminares; uma migração precisa de validação própria. Não atualizar dependências ou executar instaladores `@latest` como parte de uma alteração visual rotineira.
+Keep NativeWind as the only main styling system in this foundation, without adding UniWind alongside it. This choice uses the existing setup and can be revisited. Before implementing screens, review with Gabriel whether to keep prerelease versions; a migration requires its own validation. Do not upgrade dependencies or run `@latest` installers as part of routine visual changes.
 
-O primeiro bloco usa navegação de estado local com rotas tipadas em `ChecklistApp`, incluindo retorno Android. Isso mantém o fluxo testável sem antecipar Expo Router. Router permanece uma opção para os próximos blocos; não está instalado. `App.tsx` contém somente providers e a entrada da feature.
+The first block uses local state navigation with typed routes in `ChecklistApp`, including Android back handling. This keeps the flow testable without introducing Expo Router prematurely. Router remains an option for upcoming blocks; it is not installed. `App.tsx` contains only providers and the feature entry point.
 
-Na implementação, o NativeWind já resolvido como `5.0.0-rc.0` foi fixado junto de `react-native-css@3.1.0-rc.0`, exigido em seu peer dependency. O preset legado `nativewind/babel` foi removido, mantendo o preset Expo e a integração Metro; a duplicação de transformação impedia abrir a prévia web. Os tokens usam tema claro conforme Paper, sem seletores `:root.light`/`:root.dark` incompatíveis com o compilador nativo atual. Não houve troca de motor ou atualização do Expo. Referência: [instalação NativeWind v5](https://www.nativewind.dev/v5/getting-started/installation).
+During implementation, NativeWind, already resolved as `5.0.0-rc.0`, was pinned alongside its required peer dependency `react-native-css@3.1.0-rc.0`. The legacy `nativewind/babel` preset was removed, keeping the Expo preset and Metro integration; duplicate transformation prevented the web preview from opening. Tokens use the light theme from Paper, without `:root.light`/`:root.dark` selectors that are incompatible with the current native compiler. The styling engine and Expo version were not changed. Reference: [NativeWind v5 installation](https://www.nativewind.dev/v5/getting-started/installation).
 
-## Estrutura incremental
+## Incremental structure
 
-| Local | Responsabilidade | Situação |
+| Location | Responsibility | Status |
 | --- | --- | --- |
-| `App.tsx` | Entrada atual | Existente; não ampliar com os fluxos inteiros |
-| `components/ui/` | Componentes Gluestack instalados | Manter caminho atual para evitar migração sem benefício |
-| `global.css` | Tokens de cor e configuração NativeWind | Existente; valores não são identidade visual aprovada |
-| `src/types/` | Tipos preliminares do domínio e demonstração | Adicionados nesta fundamentação |
-| `src/features/` | Telas, estado e lógica de apresentação por funcionalidade | Primeiro fluxo em `checklists/` |
-| `src/components/checklist/` | Componentes específicos reutilizáveis | Item e seção do checklist |
-| `src/mocks/` | Catálogo, cenários e operações simuladas | Fixtures renovadas a cada reset |
-| `src/theme/` | Escalas e convenções compartilhadas além das cores | `patterns.ts` documenta a escala do Paper |
-| `app/` | Rotas e layouts finos | Criar somente se Expo Router for adotado |
-| `docs/` | Produto, decisões, arquitetura e plano de validação | Documentação de continuidade |
+| `App.tsx` | Current entry point | Existing; do not expand it to contain entire flows |
+| `components/ui/` | Installed Gluestack components | Keep the current path to avoid a migration without benefit |
+| `global.css` | Color tokens and NativeWind configuration | Existing; values are not an approved visual identity |
+| `src/types/` | Preliminary domain and demonstration types | Added with the foundations |
+| `src/features/` | Screens, state, and presentation logic by feature | First flow in `checklists/` |
+| `src/components/checklist/` | Reusable feature components | Checklist item and section |
+| `src/mocks/` | Catalog, scenarios, and simulated operations | Fresh fixtures on each reset |
+| `src/theme/` | Shared scales and conventions beyond colors | `patterns.ts` documents the Paper scale |
+| `app/` | Thin routes and layouts | Create only if Expo Router is adopted |
+| `docs/` | Product, decisions, architecture, and validation plan | Continuity documentation |
 
-Não criar pastas vazias, camada de API genérica, repositórios abstratos ou configuração de infraestrutura antecipadamente. Se uma funcionalidade precisar de regras locais, mantê-las em funções puras próximas da feature; extrair apenas quando houver reutilização concreta.
+Do not create empty folders, a generic API layer, abstract repositories, or infrastructure configuration in advance. If a feature needs local rules, keep them in pure functions near the feature; extract them only when there is actual reuse.
 
-## Dependências e estado
+## Dependencies and state
 
-Direção pretendida: entradas de navegação → features → componentes reutilizáveis. Regras locais dependem de tipos e dados, sem importar componentes, navegação ou SDKs externos. Tipos não dependem de UI.
+Intended direction: navigation entry points → features → reusable components. Local rules depend on types and data without importing components, navigation, or external SDKs. Types do not depend on UI.
 
-Na demonstração, um estado compartilhado simples (Context + reducer, se suficiente) deve manter listas e rascunhos coerentes entre telas. Componentes recebem dados e ações; não carregam mocks ou acessam serviços diretamente. Alterações são imutáveis. O catálogo é referência; uma edição pessoal não deve modificá-lo.
+In the demonstration, simple shared state (Context + reducer, if sufficient) should keep lists and drafts consistent between screens. Components receive data and actions; they do not load mocks or access services directly. Changes are immutable. The catalog is a reference; personal edits must not modify it.
 
-Separar rascunho de quiz/edição da lista confirmada. Voltar ou cancelar não pode aplicar alterações parciais silenciosamente. Identificadores estáveis distinguem listas, categorias e itens; duplicar uma lista exige novas identidades e cópia dos objetos aninhados. Não usar nomes ou posições de arrays como identidade.
+Separate quiz/editing drafts from the confirmed list. Going back or canceling must not silently apply partial changes. Stable identifiers distinguish lists, categories, and items; duplicating a list requires new identities and copies of nested objects. Do not use names or array positions as identity.
 
-Os tipos em `src/types/index.ts` são uma proposta de representação para discutir com Gabriel e Bruno, não contratos de API ou banco. As opções do quiz são provisórias e não prescrevem labels, ordem, obrigatoriedade ou controles visuais. Validação em tempo de execução será necessária quando os comportamentos forem implementados; TypeScript sozinho não valida entradas.
+The types in `src/types/index.ts` are a proposed representation to discuss with Gabriel and Bruno, not API or database contracts. Quiz options are provisional and do not prescribe labels, order, required answers, or visual controls. Runtime validation will be necessary when behaviors are implemented; TypeScript alone does not validate input.
 
-## Regras locais a implementar depois
+## Local rules to implement later
 
-- Progresso deriva de itens concluídos / total de itens. Quantidade não cria conclusão parcial. Lista vazia mostra 0 de 0, sem divisão por zero. A privacidade não altera o progresso pessoal.
-- Quantidade deve ser positiva e finita; decidir inteiros, frações e unidades antes do formulário final. Não inferir quantidades clínicas ou recomendações médicas.
-- Geração combina base recorrente e sugestões condicionais. Hospedagem e transporte são escolhas fornecidas; clima pode combinar frio, calor e chuva. Não consultar previsão automaticamente.
-- Adaptação mantém propostas separadas da lista, com motivo e estado pendente/aceita/rejeitada. Aplicar uma proposta uma única vez; rejeitar não altera conteúdo. Confirmar só após revisar pendências. Se a base mudar durante a revisão, recalcular ou invalidar propostas, preservando as escolhas explicitamente.
-- Mudança de camping próprio para hotel pode sugerir retirar barraca. A presença da barraca, sozinha, não autoriza remoção automática de um item personalizado.
-- Reutilização e cópia não compartilham referências mutáveis com o original. A política de reiniciar conclusão ao reaproveitar será validada antes da UI; uma cópia recebida nunca herda o progresso do autor.
+- Progress derives from completed items / total items. Quantity does not create partial completion. An empty list shows 0 of 0 without division by zero. Privacy does not change personal progress.
+- Quantity must be positive and finite; decide on integers, fractions, and units before the final form. Do not infer clinical quantities or medical recommendations.
+- Generation combines a recurring base with conditional suggestions. Accommodation and transport are user-provided choices; weather can combine cold, heat, and rain. Do not automatically fetch a forecast.
+- Adaptation keeps proposals separate from the list, with a reason and pending/accepted/rejected state. Apply a proposal only once; rejection does not change content. Confirm only after reviewing pending proposals. If the base changes during review, recalculate or invalidate proposals while explicitly preserving choices.
+- Switching from own camping to a hotel may suggest removing a tent. The presence of a tent alone does not authorize automatically removing a custom item.
+- Reuse and copying do not share mutable references with the original. The policy for resetting completion when reusing a list will be validated before UI implementation; a received copy never inherits the author's progress.
 
-## Fronteira de compartilhamento
+## Sharing boundary
 
-Não serializar `Checklist` inteiro para compartilhar. Construir um novo `ShareableChecklist` com uma lista explícita de campos permitidos, depois de resolver a política de visibilidade. Não incluir conclusão, IDs pessoais de itens, preferências privadas ou contexto da viagem por conveniência. O contexto pode revelar dados pessoais e não está incluído no conteúdo mínimo acordado.
+Do not serialize an entire `Checklist` for sharing. Build a new `ShareableChecklist` with an explicit allowlist of fields after resolving visibility policy. Do not include completion, personal item IDs, private preferences, or trip context for convenience. Context can reveal personal data and is not part of the agreed minimum content.
 
-Categorias sem itens visíveis devem ser omitidas da projeção proposta, evitando expor nomes de categorias privadas. A política de precedência e os padrões ainda exigem aprovação; enquanto não definidos, não implementar um filtro com defaults implícitos.
+Categories without visible items should be omitted from the proposed projection to avoid exposing private category names. Precedence and default policies still require approval; until defined, do not implement a filter with implicit defaults.
 
-Uma prévia e sua publicação simulada devem usar a mesma projeção. O tipo público não garante sozinho privacidade: a transformação e os testes precisam verificar exclusão real de campos, inclusive em texto/imagem. Copiar do compartilhado só pode usar o conteúdo que chegou ao destinatário, sem recuperar itens privados da lista original presente nos mocks.
+A preview and its simulated publication must use the same projection. The public type alone does not guarantee privacy: transformation and tests must verify actual field exclusion, including in text/images. Copying shared content can only use what reached the recipient, without retrieving private items from the original list in the mocks.
 
-Manter uma fotografia da última publicação simulada separada da lista pessoal atual. Edições locais não mudam essa fotografia até uma nova publicação simulada bem-sucedida. Isso permite discutir pendência e falha sem decidir se o produto real atualizará links automaticamente ou por novas versões.
+Keep a snapshot of the latest simulated publication separate from the current personal list. Local edits do not change that snapshot until another successful simulated publication. This allows discussion of pending changes and failures without deciding whether the real product will update links automatically or through new versions.
 
-## Design e componentes
+## Design and components
 
-Reutilizar `Box`, `Text`, `Heading`, `VStack`, `Button` e provider existentes. Componentes candidatos após receber o Paper: `ChecklistItem`, `ChecklistSection`, `QuizOption` e `AdaptationSuggestion`. Criar variantes quando o mesmo padrão aparecer; evitar implementar todos preventivamente.
+Reuse existing `Box`, `Text`, `Heading`, `VStack`, `Button`, and provider components. Component candidates after receiving Paper: `ChecklistItem`, `ChecklistSection`, `QuizOption`, and `AdaptationSuggestion`. Create variants when a pattern repeats; avoid implementing everything preemptively.
 
-Mapear papéis semânticos já existentes: `background`/`foreground` para base, `card` para superfície, `muted`/`muted-foreground` para conteúdo secundário, `primary` para ação principal, `border` para contorno e `destructive` para ação destrutiva. Os valores atuais são provisórios. Após o Paper, documentar escala de tipografia, espaçamento, raios, dimensões de controles e estados antes de espalhar valores pelas telas.
+Map existing semantic roles: `background`/`foreground` for the base, `card` for surfaces, `muted`/`muted-foreground` for secondary content, `primary` for main actions, `border` for outlines, and `destructive` for destructive actions. Current values are provisional. After Paper, document typography, spacing, radii, control dimensions, and states before scattering values across screens.
 
-Conclusão, seleção, privacidade, foco, desabilitado e erro precisam de indicação além da cor. Prever leitor de tela, textos ampliados, teclado, áreas de toque e confirmação/recuperação de exclusão conforme o desenho. Não confundir neutralidade de média fidelidade com ausência de estados acessíveis.
+Completion, selection, privacy, focus, disabled, and error states need indicators beyond color. Plan for screen readers, enlarged text, keyboards, touch targets, and deletion confirmation/recovery according to the design. Do not confuse neutral medium-fidelity design with a lack of accessible states.
 
-## Fronteira futura com Bruno
+## Future boundary with Bruno
 
-Ao existir integração concreta, substituir operações simuladas próximas às features por adaptadores que recebam e devolvam os tipos acordados. Não acoplar telas a tabelas ou respostas brutas. Manter derivação de progresso e regras de apresentação independentes de rede.
+Once there is a concrete integration, replace simulated operations near features with adapters that accept and return agreed types. Do not couple screens to tables or raw responses. Keep progress derivation and presentation rules independent of networking.
 
-Bruno avaliará armazenamento e migrações, identificação, publicação e versionamento, leitura pública, deep links, fila offline/retries, conflitos, backup e recuperação. A demonstração não escolhe esses serviços. O payload público deverá ser validado também na infraestrutura; o filtro de UI não pode ser a única garantia de privacidade.
+Bruno will assess storage and migrations, identification, publication and versioning, public reading, deep links, offline queues/retries, conflicts, backup, and recovery. The demonstration does not choose these services. Public payloads must also be validated in the infrastructure; the UI filter cannot be the only privacy guarantee.

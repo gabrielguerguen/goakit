@@ -1,26 +1,26 @@
 # Goakit
 
-Aplicativo de checklists para festivais de música, com foco inicial em psytrance, para Android e iOS. Base técnica com Expo, React Native, TypeScript e Gluestack UI. O suporte web existente serve para prévia de desenvolvimento; um aplicativo web completo está fora do escopo.
+A music festival checklist app for Android and iOS, initially focused on psytrance. Built with Expo, React Native, TypeScript, and Gluestack UI. Existing web support is for development previews; a complete web application is outside the scope.
 
-## Momento do projeto
+## Project status
 
-O primeiro bloco de interface foi implementado a partir do Paper: Minhas listas, estado vazio, checklist, adicionar/editar/remover itens e progresso. Veja [como testar e limites da entrega](docs/implementation.md).
+The first UI block was implemented from Paper: My lists, empty states, checklist, adding/editing/removing items, and progress. See [testing instructions and delivery limits](docs/implementation.md).
 
-A interface usa dados fictícios e estado em memória. Quiz, reaproveitamento, privacidade e compartilhamento são próximos blocos, ainda indisponíveis. Não há backend, persistência ou integrações reais; Bruno cuidará da infraestrutura posteriormente.
+The interface uses mock data and in-memory state. The quiz, list reuse, privacy, and sharing are upcoming blocks and are not yet available. There is no backend, persistence, or live integration; Bruno will handle infrastructure later.
 
-## Fundamentação
+## Project foundations
 
-- [Produto e recorte atual](docs/product.md)
-- [Organização, tipos e fronteiras técnicas](docs/architecture.md)
-- [Decisões confirmadas, propostas e questões abertas](docs/decisions.md)
-- [Sequência de entrega, cenários de aceite e passagem para Bruno](docs/delivery.md)
-- [Instruções para desenvolvimento com IA](AGENTS.md)
+- [Product and current scope](docs/product.md)
+- [Organization, types, and technical boundaries](docs/architecture.md)
+- [Confirmed decisions, proposals, and open questions](docs/decisions.md)
+- [Delivery sequence, acceptance scenarios, and handoff to Bruno](docs/delivery.md)
+- [AI development instructions](AGENTS.md)
 
-O [briefing principal](https://docs.google.com/document/d/1bDFO0IcOABNzh1txCChQS_F3TNGzH141BjY0kG8kkes/edit) orienta o produto. A documentação local distingue o produto final do protótipo atual.
+The [main brief](https://docs.google.com/document/d/1bDFO0IcOABNzh1txCChQS_F3TNGzH141BjY0kG8kkes/edit) guides the product. Local documentation distinguishes the final product from the current prototype.
 
-## Começar
+## Getting started
 
-Use Node.js 22 (veja `.nvmrc`).
+Use Node.js 22 (see `.nvmrc`).
 
 ```sh
 nvm install
@@ -29,26 +29,26 @@ npm ci
 npm start
 ```
 
-Abra o QR code no Expo Go compatível com o SDK instalado. No terminal, pressione `a` para Android ou `i` para o simulador de iOS (macOS com Xcode). Para web:
+Open the QR code in an Expo Go version compatible with the installed SDK. In the terminal, press `a` for Android or `i` for the iOS simulator (macOS with Xcode). For web:
 
 ```sh
 npm run web
 ```
 
-## Estrutura
+## Structure
 
-- `App.tsx`: providers e entrada da aplicação.
-- `components/ui/`: componentes Gluestack que podem ser personalizados.
-- `global.css`: estilos e tokens do tema.
-- `assets/`: imagens e ícones.
-- `src/types/`: tipos preliminares usados pelas telas e pelo estado local.
-- `src/features/checklists/`: telas, navegação e regras locais do primeiro fluxo.
-- `src/components/`: componentes reutilizáveis do aplicativo.
-- `src/mocks/` e `src/theme/`: dados fictícios e padrões visuais do Paper.
-- `docs/`: fundamentação, implementação e planejamento.
-- `.github/workflows/ci.yml`: verificações automáticas de tipos, dependências e geração dos bundles.
+- `App.tsx`: providers and application entry point.
+- `components/ui/`: Gluestack components that can be customized.
+- `global.css`: styles and theme tokens.
+- `assets/`: images and icons.
+- `src/types/`: preliminary types used by screens and local state.
+- `src/features/checklists/`: screens, navigation, and local rules for the first flow.
+- `src/components/`: reusable application components.
+- `src/mocks/` and `src/theme/`: mock data and visual patterns from Paper.
+- `docs/`: foundations, implementation, and planning.
+- `.github/workflows/ci.yml`: automated type, dependency, and bundle checks.
 
-## Verificação
+## Verification
 
 ```sh
 npm run typecheck
@@ -57,29 +57,29 @@ npx expo install --check
 npx expo export --platform all
 ```
 
-A exportação verifica os bundles JavaScript; não gera binários para as lojas nem substitui testes em dispositivos.
+Export checks JavaScript bundles; it does not produce store binaries or replace device testing.
 
-Para compilar e instalar no seu iPhone pelo Mac com uma conta Apple gratuita, veja [testes locais no iOS](docs/ios-local-testing.md). O identificador inicial de iOS é `com.gabrielguerguen.goakit`. O comando `npm run ios:device` usa configuração Release, com o código da interface incluído no aplicativo; depende de Xcode, CocoaPods, assinatura e aparelho preparados.
+To build and install on your iPhone from a Mac with a free Apple account, see [local iOS testing](docs/ios-local-testing.md). The initial iOS identifier is `com.gabrielguerguen.goakit`. The `npm run ios:device` command uses the Release configuration, with the interface code bundled into the application; Xcode, CocoaPods, signing, and the device must be ready.
 
-## Novos componentes
+## Adding components
 
-Antes de adicionar componentes, confirme uma versão do CLI Gluestack compatível com a stack instalada e use o comando `add` dessa versão. Revise o diff gerado; não atualize a stack implicitamente para adicionar um componente.
+Before adding components, confirm a Gluestack CLI version compatible with the installed stack and use that version's `add` command. Review the generated diff; do not implicitly upgrade the stack to add a component.
 
-O setup utiliza Gluestack UI v5 (apresentado como alpha pelo instalador). NativeWind `5.0.0-rc.0` e `react-native-css@3.1.0-rc.0` estão fixados como par compatível de versões preliminares. As versões resolvidas estão registradas no `package-lock.json`; use `npm ci` para reproduzir a instalação. UniWind não está instalado. O primeiro bloco usa navegação local; Expo Router permanece uma proposta.
+The setup uses Gluestack UI v5 (presented as alpha by the installer). NativeWind `5.0.0-rc.0` and `react-native-css@3.1.0-rc.0` are pinned as a compatible pair of prerelease versions. Resolved versions are recorded in `package-lock.json`; use `npm ci` to reproduce the installation. UniWind is not installed. The first block uses local navigation; Expo Router remains a proposal.
 
-## Configuração
+## Configuration
 
-Copie `.env.example` para `.env` se precisar de variáveis de ambiente. Variáveis `EXPO_PUBLIC_` ficam disponíveis no aplicativo e não devem conter segredos. Nunca envie tokens, senhas ou chaves privadas ao GitHub.
+Copy `.env.example` to `.env` if you need environment variables. `EXPO_PUBLIC_` variables are available in the application and must not contain secrets. Never send tokens, passwords, or private keys to GitHub.
 
-## Publicação nas lojas
+## Store distribution
 
-O projeto ainda não está vinculado a uma conta Expo/EAS. Antes de distribuir, defina os identificadores de Android e iOS, substitua os ícones padrão, configure o EAS e as credenciais das lojas.
+The project is not yet linked to an Expo/EAS account. Before distribution, define Android and iOS identifiers, replace the default icons, and configure EAS and store credentials.
 
-## Referências
+## References
 
-- [Expo e TypeScript](https://docs.expo.dev/guides/typescript/)
-- [Instalação do Gluestack UI](https://v5.gluestack.io/ui/docs/home/getting-started/installation)
+- [Expo and TypeScript](https://docs.expo.dev/guides/typescript/)
+- [Gluestack UI installation](https://v5.gluestack.io/ui/docs/home/getting-started/installation)
 
-## Estado das dependências
+## Dependency status
 
-Na configuração inicial, `npm audit` reportou 21 alertas em dependências transitivas do Expo/Metro (7 moderados e 14 altos). A correção sem mudanças incompatíveis foi tentada; os alertas permanecem. Revise as atualizações do SDK antes de distribuir o aplicativo. Não aplique `npm audit fix --force` automaticamente: a sugestão atual inclui regressão para versões antigas do Expo.
+During initial setup, `npm audit` reported 21 advisories in transitive Expo/Metro dependencies (7 moderate and 14 high). A fix without incompatible changes was attempted; the advisories remain. Review SDK updates before distributing the app. Do not automatically apply `npm audit fix --force`: the current suggestion includes downgrading to older versions of Expo.

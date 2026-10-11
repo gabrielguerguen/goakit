@@ -1,58 +1,58 @@
-# Plano de implementação e validação
+# Implementation and validation plan
 
-## Entrega atual
+## Current delivery
 
-Fundamentação concluída e primeiro bloco de UI implementado: listas, checklist e edição de itens em memória. Veja [implementação, validação e limites](implementation.md). Geração, adaptação, filtro de privacidade, autenticação e publicação permanecem planejados.
+Foundations completed and the first UI block implemented: lists, checklist, and in-memory item editing. See [implementation, validation, and limits](implementation.md). Generation, adaptation, privacy filtering, authentication, and publication remain planned.
 
-## Sequência de implementação a partir do Paper recebido
+## Implementation sequence from the received Paper designs
 
-1. Relacionar cada tela e estado ao fluxo em `product.md`; identificar lacunas, perguntas abertas e componentes existentes antes de programar.
-2. Acordar decisões que afetam o primeiro fluxo: versões, navegação, campos mínimos da lista e quantidades. Registrar tokens e variantes a partir do design, mantendo a identidade provisória.
-3. Implementar estrutura e checklist funcional com dados centralizados e edição em memória. Validar coerência de progresso e retorno entre telas.
-4. Acrescentar quiz e geração local; depois reaproveitamento e revisão de adaptações.
-5. Definir privacidade antes de implementar prévias, identificação e publicação simulada. Acrescentar experiência de destinatário e cópia independente.
-6. Executar cenários abaixo e registrar limitações para Bruno. Verificar em Android e iOS antes de afirmar validação mobile; exportar bundles não substitui isso.
+1. Map each screen and state to the flow in `product.md`; identify gaps, open questions, and existing components before coding.
+2. Agree on decisions affecting the first flow: versions, navigation, minimum list fields, and quantities. Record tokens and variants from the design, keeping the identity provisional.
+3. Implement the structure and functional checklist with centralized data and in-memory editing. Validate consistent progress and navigation between screens.
+4. Add the quiz and local generation; then reuse and adaptation review.
+5. Define privacy before implementing previews, identification, and simulated publication. Add the recipient experience and independent copying.
+6. Run the scenarios below and record limitations for Bruno. Check Android and iOS before claiming mobile validation; exporting bundles is not a substitute.
 
-Cada entrega deve funcionar com os fluxos que anuncia, sem botões que pareçam conectados a serviços inexistentes. O protótipo pode ter um seletor de cenários claramente demonstrativo para vazio, offline e falha; o formato desse controle depende do design.
+Each delivery must support the flows it announces, without buttons that appear connected to nonexistent services. The prototype may have a clearly labeled demonstration scenario selector for empty, offline, and failure states; the format of this control depends on design.
 
-## Cenários de aceite para o futuro protótipo
+## Acceptance scenarios for the future prototype
 
-| Cenário | Evidência esperada |
+| Scenario | Expected evidence |
 | --- | --- |
-| Nenhuma lista | Estado vazio permite iniciar quiz; exemplos podem ser restaurados sem reiniciar o app |
-| Quiz | Avançar/voltar preserva rascunho; contexto usado fica compreensível; geração não requer rede |
-| Editar lista | Nome e quantidade válidos são aplicados; cancelar preserva o original; erro não corrompe estado |
-| Concluir | Marcar/desmarcar atualiza o contador; quantidade >1 continua binária |
-| Remover último item | Lista fica vazia sem erro ou percentual inválido |
-| Reaproveitar | Original preservado; sugestões têm motivo; somente aceitas afetam a nova lista |
-| Rejeitar proposta | Conteúdo não muda; retorno entre telas preserva decisão durante a sessão |
-| Aplicar novamente | Proposta aceita não duplica item nem aplica ajuste duas vezes |
-| Item personalizado | Preservado conforme política acordada; adaptação não o remove silenciosamente |
-| Categoria e exceções | Exercitar categoria visível/oculta × item herdado/visível/oculto conforme Q01/Q02 |
-| Prévia de link, JPG e texto | Mesmos itens e quantidades permitidos; sem progresso nem conteúdo privado |
-| Publicar link | Identificação fictícia indicada; nunca solicita senha real nem gera URL pública |
-| Offline/falha | Edição local preservada; pendência visível; última publicação simulada permanece; retry não perde dados |
-| Tornar privado após publicar | Prévia atual oculta item; publicação anterior permanece até atualização simulada; explicar essa diferença |
-| Consultar e copiar | Destinatário acessa apenas projeção pública; pode copiar diretamente ou passar pelo quiz |
-| Editar cópia | Alterações não afetam original e vice-versa; não herda progresso pessoal do autor |
-| Reiniciar | Dados podem voltar ao cenário inicial; limitação de memória explicitada nos testes |
+| No lists | Empty state allows starting the quiz; examples can be restored without restarting the app |
+| Quiz | Moving forward/back preserves the draft; context is understandable; generation does not require networking |
+| Edit list | Valid names and quantities are applied; canceling preserves the original; errors do not corrupt state |
+| Complete | Checking/unchecking updates the counter; quantities greater than 1 remain binary |
+| Remove last item | List becomes empty without errors or an invalid percentage |
+| Reuse | Original preserved; suggestions have reasons; only accepted ones affect the new list |
+| Reject proposal | Content does not change; navigating between screens preserves the decision during the session |
+| Apply again | An accepted proposal does not duplicate an item or apply an adjustment twice |
+| Custom item | Preserved according to the agreed policy; adaptation does not silently remove it |
+| Categories and exceptions | Exercise visible/hidden categories × inherited/visible/hidden items according to Q01/Q02 |
+| Link, JPG, and text previews | Same allowed items and quantities; no progress or private content |
+| Publish link | Mock identification is labeled; never requests a real password or generates a public URL |
+| Offline/failure | Local editing preserved; pending status visible; latest simulated publication remains; retry does not lose data |
+| Make private after publication | Current preview hides the item; previous publication remains until simulated update; explain the difference |
+| Browse and copy | Recipient accesses only the public projection; can copy directly or take the quiz |
+| Edit copy | Changes do not affect the original and vice versa; does not inherit the author's personal progress |
+| Restart | Data may return to the initial scenario; in-memory limitation is explicit during testing |
 
-“JPG”, “link” e “texto” nesta fase descrevem opções/prévias e feedback; exportação de arquivo, área de transferência, share sheet e endereço público não estão implicitamente incluídos. Decidir separadamente se algum recurso nativo local for necessário para testes.
+“JPG,” “link,” and “text” in this phase describe options/previews and feedback; file export, clipboard, share sheets, and public addresses are not implicitly included. Decide separately whether any local native capability is needed for testing.
 
-## Verificações técnicas proporcionais
+## Proportionate technical checks
 
-Documentação: revisar consistência e links internos. Tipos: `npm run typecheck`. Mudanças de componentes, estilos ou navegação: checar dependências e exportar bundles, além de testar os estados nos dispositivos disponíveis.
+Documentation: review consistency and internal links. Types: `npm run typecheck`. Component, styling, or navigation changes: check dependencies and export bundles, in addition to testing states on available devices.
 
-Quando as regras forem implementadas, criar testes de comportamento para fronteiras relevantes: filtro público sem campos privados/progresso, cópia sem referências compartilhadas, adaptação aplicada uma única vez e progresso em lista vazia. Não criar testes que apenas reproduzam os tipos ou o conteúdo estático dos documentos.
+When rules are implemented, create behavior tests for relevant boundaries: public filtering without private fields/progress, copies without shared references, adaptations applied once, and empty-list progress. Do not create tests that merely reproduce types or static document content.
 
-## O que observar com pessoas
+## What to observe with people
 
-Conseguem entender o contexto da lista, ajustar uma sugestão e terminar a preparação? Diferenciam lista pessoal, prévia e versão publicada? Entendem por que uma adaptação apareceu e que podem rejeitá-la? Sabem que a cópia é independente? Onde a base de itens exige correção? Na experiência simulada de destinatário, a instalação interromperia a intenção de copiar?
+Can they understand a list's context, adjust a suggestion, and finish preparing? Can they distinguish a personal list, a preview, and a published version? Do they understand why an adaptation appeared and that they can reject it? Do they know the copy is independent? Where does the item base need correction? In the simulated recipient experience, would installation interrupt the intention to copy?
 
-São perguntas de pesquisa, não métricas já atingidas. Não adicionar analytics real para respondê-las nesta fase.
+These are research questions, not metrics already achieved. Do not add real analytics to answer them in this phase.
 
-## Passagem para Bruno
+## Handoff to Bruno
 
-Entregar lista dos fluxos realmente implementados, cenários fictícios reproduzíveis, decisões resolvidas/pendentes, tipos revisados e inventário das operações simuladas. Distinguir o que foi testado em aparelho, apenas exportado e ainda não verificado.
+Deliver the list of flows actually implemented, reproducible mock scenarios, resolved/open decisions, reviewed types, and an inventory of simulated operations. Distinguish what was tested on devices, only exported, and not yet checked.
 
-Discutir explicitamente: armazenamento e migrações, identidade de publicação, payload público mínimo, controle de versões, retirada de conteúdo privado, operações pendentes, falhas/retries, acesso público e deep links, recuperação e eventual sincronização. Sem prometer prazo, arquitetura ou fornecedor antes dessa avaliação.
+Discuss explicitly: storage and migrations, publication identity, minimum public payloads, version control, removal of private content, pending operations, failures/retries, public access and deep links, recovery, and possible synchronization. Do not promise deadlines, architecture, or infrastructure before this assessment.

@@ -1,35 +1,39 @@
-# Instruções de continuidade — Goakit
+# Development continuity instructions — Goakit
 
-## Escopo e fontes
+## Scope and sources
 
-- Leia `docs/product.md`, `docs/architecture.md`, `docs/decisions.md` e `docs/delivery.md` antes de alterar funcionalidades.
-- O briefing principal está linkado em `docs/product.md`. Instruções explícitas atuais de Gabriel delimitam a entrega e prevalecem sobre propostas técnicas.
-- As telas do Paper foram recebidas; referência e primeiro recorte estão em `docs/implementation.md`. Consulte o material antes de ampliar a UI. Não invente identidade visual ou fluxos novos; a tela antiga do setup não era design aprovado do produto.
-- A fase atual é interface com dados simulados e estado em memória. Não adicione backend, persistência, autenticação real, links públicos ou integrações sem nova autorização de escopo. Bruno é responsável pela infraestrutura futura.
+- Read `docs/product.md`, `docs/architecture.md`, `docs/decisions.md`, and `docs/delivery.md` before changing functionality.
+- The main brief is linked in `docs/product.md`. Gabriel's current explicit instructions define the delivery and take precedence over technical proposals.
+- The Paper screens have been received; the reference and first implementation scope are in `docs/implementation.md`. Consult the material before expanding the UI. Do not invent a visual identity or new flows; the old setup screen was not an approved product design.
+- The current phase is an interface with mock data and in-memory state. Do not add a backend, persistence, real authentication, public links, or integrations without new scope authorization. Bruno is responsible for future infrastructure.
 
-## Stack e organização
+## Stack and organization
 
-- Expo + React Native + TypeScript estrito + Gluestack UI. NativeWind é o motor existente; não misture com UniWind.
-- Verifique `package.json`, `package-lock.json` e `.nvmrc`. Use documentação compatível com as versões instaladas, incluindo [Expo SDK 57](https://docs.expo.dev/versions/v57.0.0/) e [Gluestack v5](https://v5.gluestack.io/ui/docs/home/getting-started/installation). NativeWind está em preview; não aplique receitas de v4 automaticamente.
-- Expo Router é proposta, não dependência instalada. Não migre a entrada sem registrar a decisão.
-- Consulte `components/ui/` antes de criar componentes. Mantenha telas/lógica por feature, dados fictícios centralizados em `src/mocks/` quando necessários e tipos em `src/types/`.
-- Não concentre toda a aplicação em `App.tsx`. Não crie abstrações de backend ou pastas vazias preventivamente.
-- Tokens de cores existentes estão em `global.css`; não duplique seus valores em componentes. A escala inicial do Paper está em `src/theme/patterns.ts` e `docs/implementation.md`. Prefira papéis semânticos e variantes reutilizáveis.
+- Expo + React Native + strict TypeScript + Gluestack UI. NativeWind is the existing styling engine; do not mix it with UniWind.
+- Check `package.json`, `package-lock.json`, and `.nvmrc`. Use documentation matching the installed versions, including [Expo SDK 57](https://docs.expo.dev/versions/v57.0.0/) and [Gluestack v5](https://v5.gluestack.io/ui/docs/home/getting-started/installation). NativeWind is in preview; do not automatically apply v4 recipes.
+- Expo Router is a proposal, not an installed dependency. Do not migrate the entry point without recording the decision.
+- Consult `components/ui/` before creating components. Keep screens/logic organized by feature, mock data centralized in `src/mocks/` when needed, and types in `src/types/`.
+- Do not put the entire application in `App.tsx`. Do not create backend abstractions or empty folders preemptively.
+- Existing color tokens are in `global.css`; do not duplicate their values in components. The initial Paper scale is in `src/theme/patterns.ts` and `docs/implementation.md`. Prefer semantic roles and reusable variants.
 
-## Invariantes
+## Invariants
 
-- Conclusão é um booleano por item. Progresso é individual e derivado; não implemente etapas comprar/separar/embalar.
-- Cópia/reaproveitamento têm identidade própria e objetos independentes. Não propague alterações entre original e cópia.
-- Adaptações são propostas com motivo; somente aceitas alteram a nova lista. Preserve escolhas pessoais.
-- Nunca compartilhe o objeto pessoal inteiro. Gere uma projeção explícita apenas com campos permitidos, sem progresso ou itens privados.
-- Padrões de privacidade e precedência de exceções ainda estão abertos. Não decida implicitamente por defaults.
-- Não represente feedback fictício como conta, link, sincronização ou publicação real. Não peça senhas reais no protótipo.
-- Tipos são preliminares para apresentação, não contratos definitivos de API/banco.
+- Completion is one boolean per item. Progress is personal and derived; do not implement separate purchase/prepare/pack stages.
+- Copies and reused lists have their own identities and independent objects. Do not propagate changes between an original and a copy.
+- Adaptations are proposals with reasons; only accepted proposals change the new list. Preserve personal choices.
+- Never share the entire personal object. Generate an explicit projection containing only allowed fields, without progress or private items.
+- Privacy defaults and exception precedence remain open. Do not decide them implicitly through defaults.
+- Do not present mock feedback as a real account, link, synchronization, or publication. Do not request real passwords in the prototype.
+- Types are preliminary presentation types, not final API/database contracts.
 
-## Verificação e entrega
+## Verification and delivery
 
-- Documentação: confira consistência, referências e decisões. Tipos: execute `npm run typecheck`.
-- Mudanças de UI/navegação/dependências: execute checks de compatibilidade e bundles conforme README; registre quais aparelhos foram testados. Não afirme teste mobile só porque a exportação passou.
-- Quando implementar regras, teste comportamentos relevantes (privacidade, independência da cópia, aplicação única de adaptações, lista vazia). Evite testes redundantes de documentação/tipos.
-- Preserve credenciais fora do Git. Use branches e pull requests para revisão; não faça merge sem autorização.
-- Documente o que funciona, o que é simulado, decisões pendentes e pontos de integração do Bruno. Não anuncie fluxos planejados como concluídos.
+- Documentation: check consistency, references, and decisions. Types: run `npm run typecheck`.
+- UI/navigation/dependency changes: run compatibility and bundle checks as described in the README; record which devices were tested. Do not claim mobile testing just because export passed.
+- When implementing rules, test relevant behavior (privacy, copy independence, applying adaptations once, empty lists). Avoid redundant documentation/type tests.
+- Keep credentials out of Git. Use branches and pull requests for review; do not merge without authorization.
+- Document what works, what is simulated, open decisions, and Bruno's integration points. Do not announce planned flows as completed.
+
+## Documentation language
+
+Maintain repository documentation in English. The application interface and mock content remain in Portuguese unless Gabriel explicitly requests a product-language change. Preserve exact UI labels when they help someone find a control while testing.
