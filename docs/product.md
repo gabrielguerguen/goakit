@@ -1,61 +1,61 @@
-# Fundamentos do Goakit
+# Goakit foundations
 
-## Fonte e recorte
+## Source and scope
 
-Referência principal: [Briefing app checklists para festivais](https://docs.google.com/document/d/1bDFO0IcOABNzh1txCChQS_F3TNGzH141BjY0kG8kkes/edit), de Gabriel Guerguen, consultado em 10/10/2026. O briefing orienta o produto; as instruções de Gabriel nesta conversa delimitam a entrega atual. Este documento é uma síntese de trabalho, não uma cópia nem uma substituição do briefing. Mudanças futuras na fonte exigem revisão desta síntese.
+Main reference: [Festival checklist app brief](https://docs.google.com/document/d/1bDFO0IcOABNzh1txCChQS_F3TNGzH141BjY0kG8kkes/edit), by Gabriel Guerguen, consulted on October 10, 2026. The brief guides the product; Gabriel's instructions in this conversation define the current delivery. This document is a working synthesis, not a copy or replacement of the brief. Future changes to the source require reviewing this synthesis.
 
-**Agora: primeiro bloco de UI a partir das telas do Paper recebidas: início/listas, checklist e adicionar/editar/remover itens.** Veja [estado da implementação](implementation.md). A fundamentação continua orientando os demais fluxos.
+**Now: the first UI block based on the received Paper screens: home/lists, checklist, and adding/editing/removing items.** See [implementation status](implementation.md). The foundations continue to guide the remaining flows.
 
-**Próxima etapa: interface navegável, com dados fictícios e estado em memória.** Bruno implementará infraestrutura e integrações em uma etapa posterior. Persistência, links públicos e contas reais não fazem parte do protótipo. O critério de fechar e reabrir mantendo dados, presente no briefing, pertence ao produto final e não ao aceite desta demonstração.
+**Next stage: a navigable interface with mock data and in-memory state.** Bruno will implement infrastructure and integrations later. Persistence, public links, and real accounts are not part of the prototype. The brief's requirement to preserve data after closing and reopening belongs to the final product, not this demonstration's acceptance criteria.
 
-## Problema e hipótese de valor
+## Problem and value hypothesis
 
-Preparar uma viagem para um festival envolve lembrar itens e ajustar a bagagem ao contexto. Uma lista genérica pode omitir necessidades ou acumular itens desnecessários. Ao reaproveitá-la, a pessoa precisa entender o que mudou sem perder suas escolhas.
+Preparing a festival trip involves remembering items and adapting luggage to the context. A generic list may omit necessities or accumulate unnecessary items. When reusing a list, people need to understand what has changed without losing their choices.
 
-Hipótese a validar: uma sugestão contextual, editável e reaproveitável reduz o esforço de preparação. Compartilhar o conhecimento de uma lista, preservando a autonomia de quem copia, pode torná-la útil para amigos e para a comunidade de psytrance.
+Hypothesis to validate: contextual, editable, reusable suggestions reduce preparation effort. Sharing checklist knowledge while preserving each recipient's autonomy may make the app useful to friends and the psytrance community.
 
-O público inicial inclui Gabriel, seus amigos, iniciantes e frequentadores experientes. Monetização não orienta esta fase. A utilidade da base de itens e a compreensão dos fluxos ainda precisam ser observadas; não são resultados comprovados.
+The initial audience includes Gabriel, his friends, newcomers, and experienced festivalgoers. Monetization does not guide this phase. The usefulness of the item catalog and understanding of the flows still need to be observed; they are not proven outcomes.
 
-## Princípios do produto
+## Product principles
 
-- **Controle pessoal:** uma sugestão é explicada e pode ser rejeitada. Adaptações não alteram a lista silenciosamente.
-- **Progresso individual:** cada pessoa tem sua lista e sua preparação. Conclusão é binária; não há etapas de comprar, separar ou embalar.
-- **Cópia independente:** compartilhar transmite conteúdo, não cria edição colaborativa ou sincronização entre listas.
-- **Privacidade verificável:** a prévia corresponde ao conteúdo compartilhável; itens ocultos e progresso pessoal não fazem parte dele.
-- **Uso sem conta:** criar e usar listas não exige identificação. Publicar um link passa pela experiência de identificação.
-- **Simulação honesta:** estados de publicação, conta e conexão são demonstrativos e devem ser identificados como tal.
+- **Personal control:** suggestions are explained and can be rejected. Adaptations do not silently change a list.
+- **Individual progress:** each person has their own list and preparation. Completion is binary; there are no separate purchase, prepare, or pack stages.
+- **Independent copies:** sharing transfers content; it does not create collaborative editing or synchronization between lists.
+- **Verifiable privacy:** previews match the shareable content; hidden items and personal progress are excluded.
+- **Account-free use:** creating and using lists does not require identification. Publishing a link includes an identification flow.
+- **Honest simulation:** publication, account, and connection states are demonstrations and must be labeled accordingly.
 
-## Vocabulário
+## Vocabulary
 
-| Conceito | Significado |
+| Concept | Meaning |
 | --- | --- |
-| Contexto da viagem | Duração, clima informado, hospedagem, transporte e sensibilidade térmica |
-| Catálogo | Referência fictícia para gerar sugestões; não é a lista pessoal |
-| Checklist pessoal | Categorias, itens, quantidades, conclusão e escolhas de privacidade |
-| Adaptação | Proposta de adicionar, remover ou ajustar quantidade, com motivo e decisão |
-| Conteúdo compartilhável | Projeção contendo somente nomes e quantidades visíveis, organizada por categoria |
-| Publicação | Versão compartilhável usada para demonstrar o que o destinatário consultaria |
-| Cópia | Nova lista, com identidade própria, sem vínculo de atualização com a origem |
+| Trip context | Duration, user-provided weather, accommodation, transport, and thermal sensitivity |
+| Catalog | Mock reference used to generate suggestions; not the personal list |
+| Personal checklist | Categories, items, quantities, completion, and privacy choices |
+| Adaptation | A proposal to add, remove, or adjust a quantity, with a reason and decision |
+| Shareable content | A projection containing only visible names and quantities, organized by category |
+| Publication | A shareable version used to demonstrate what a recipient would see |
+| Copy | A new list with its own identity and no update relationship with its source |
 
-## Fluxos a implementar após o design
+## Flows to implement after design
 
-| Fluxo | Resultado esperado na demonstração |
+| Flow | Expected demonstration outcome |
 | --- | --- |
-| Minhas listas | Consultar exemplos ou um estado vazio deliberadamente selecionável |
-| Quiz → sugestão | Informar contexto; gerar lista por regras locais simples; revisar antes de usar |
-| Preparação | Adicionar, editar, excluir, alterar quantidade e concluir itens; progresso acompanha alterações |
-| Reaproveitar | Informar novo contexto, avaliar propostas e criar lista independente |
-| Privacidade → prévia | Configurar categoria e exceções por item; verificar itens e quantidades expostos |
-| Compartilhar | Alternar prévias de link, imagem JPG e texto, com feedback simulado |
-| Publicar link | Percorrer identificação/cadastro fictício e estados de publicação |
-| Receber → copiar | Consultar conteúdo compartilhado e escolher cópia direta ou quiz de adaptação |
+| My lists | Browse examples or a deliberately selectable empty state |
+| Quiz → suggestion | Provide context; generate a list using simple local rules; review before use |
+| Preparation | Add, edit, delete, change quantities, and complete items; progress follows changes |
+| Reuse | Provide new context, review proposals, and create an independent list |
+| Privacy → preview | Configure categories and item exceptions; inspect exposed items and quantities |
+| Share | Switch between link, JPG image, and text previews with simulated feedback |
+| Publish link | Navigate mock identification/registration and publication states |
+| Receive → copy | Browse shared content and choose direct copying or an adaptation quiz |
 
-O produto final prevê consulta de link no navegador e instalação do app para copiar e marcar. Nesta fase, representar a experiência de destinatário dentro do protótipo; não construir uma aplicação web completa nem um redirecionamento real para lojas.
+The final product anticipates viewing links in a browser and installing the app to copy and check off items. In this phase, represent the recipient experience inside the prototype; do not build a complete web application or actual store redirects.
 
-## Limites
+## Boundaries
 
-Não implementar backend, banco, autenticação real, recuperação de conta, sincronização, backup, publicação em lojas, hospedagem ou integrações com clima, festivais e redes sociais. Não coletar senhas reais na simulação.
+Do not implement a backend, database, real authentication, account recovery, synchronization, backup, store publication, hosting, or integrations with weather, festivals, or social networks. Do not collect real passwords in the simulation.
 
-Divisão de equipamentos entre amigos, edição colaborativa, listas e regras oficiais de festivais, perfis públicos, influenciadores e afiliados ficam para evolução. Não sugerir que o catálogo fictício representa recomendações oficiais de segurança ou de saúde.
+Equipment allocation among friends, collaborative editing, official festival lists and rules, public profiles, influencers, and affiliates are future features. Do not imply that the mock catalog provides official safety or health recommendations.
 
-O app completo deverá funcionar offline com persistência. O protótipo futuro funcionará com estado em memória durante a sessão, sem prometer recuperação após reinício. Publicação pendente e falhas serão cenários visuais controlados, não uma fila real de sincronização.
+The complete app must work offline with persistence. The future prototype will use in-memory state during a session without promising recovery after restart. Pending publications and failures will be controlled visual scenarios, not a real synchronization queue.

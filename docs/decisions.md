@@ -1,54 +1,54 @@
-# Registro de decisões
+# Decision log
 
-Estado em 10/10/2026. “Proposta” não significa aprovado. Registrar mudanças aqui com motivo e impacto, preservando a referência ao briefing.
+Status as of October 10, 2026. “Proposed” does not mean approved. Record changes here with their reason and impact, preserving the reference to the brief.
 
-## Confirmado para esta etapa
+## Confirmed for this phase
 
-| ID | Decisão | Consequência |
+| ID | Decision | Consequence |
 | --- | --- | --- |
-| D01 | Aguardar telas do Paper antes de implementar a UI | Material recebido; implementação iniciada com telas 01, 02, 07, 08 e 09 |
-| D02 | Protótipo futuro com dados fictícios e estado local em memória | Sem backend, persistência ou serviços reais |
-| D03 | Progresso binário e pessoal | Sem etapas comprar/separar/embalar e sem colaboração |
-| D04 | Cópias independentes | Alterações em qualquer direção não propagam entre listas |
-| D05 | Adaptações exigem aprovação | Propostas explicadas, aceitas ou rejeitadas |
-| D06 | Compartilhar itens e quantidades respeitando privacidade | Progresso excluído de link, texto e imagem |
-| D07 | Uso sem conta; identificação ao publicar link | Identificação apenas simulada no protótipo |
-| D08 | Gabriel conduz design; Bruno implementará infraestrutura | Tipos e limites documentados, serviços não antecipados |
+| D01 | Wait for Paper screens before implementing UI | Material received; implementation started with screens 01, 02, 07, 08, and 09 |
+| D02 | Future prototype with mock data and local in-memory state | No backend, persistence, or real services |
+| D03 | Binary, personal progress | No purchase/prepare/pack stages or collaboration |
+| D04 | Independent copies | Changes in either direction do not propagate between lists |
+| D05 | Adaptations require approval | Explained proposals that can be accepted or rejected |
+| D06 | Share items and quantities while respecting privacy | Progress excluded from links, text, and images |
+| D07 | Account-free use; identification when publishing a link | Identification is simulated in the prototype |
+| D08 | Gabriel leads design; Bruno will implement infrastructure | Types and boundaries documented; services not implemented in advance |
 
-## Direção técnica de continuidade
+## Technical direction
 
-Manter o setup existente de Expo + TypeScript + Gluestack + NativeWind, sem segundo motor de estilos. As versões preliminares precisam de revisão antes da UI. Não há aprovação de identidade visual final, Expo Router, backend ou fornecedor de autenticação.
+Keep the existing Expo + TypeScript + Gluestack + NativeWind setup without a second styling engine. Prerelease versions need review before UI implementation. Final visual identity, Expo Router, backend, and authentication providers have not been approved.
 
-## Questões a resolver
+## Open questions
 
-| ID | Tema | Proposta para discutir | Momento / responsável sugerido |
+| ID | Topic | Proposal for discussion | Suggested timing / owner |
 | --- | --- | --- | --- |
-| Q01 | Visibilidade padrão | Privacidade deve ser uma escolha clara; não inferir por nomes de categorias | Antes de privacidade e compartilhamento; Gabriel |
-| Q02 | Exceção por item | `inherit` segue categoria; `visible`/`hidden` substituem categoria. Mostrar origem da decisão | Antes de implementar projeção pública; Gabriel |
-| Q03 | Campos do quiz | Definir dias/noites, valores, obrigatoriedade, resposta desconhecida e possibilidade de voltar sem perder respostas | Design do quiz; Gabriel |
-| Q04 | Quantidades | Começar com inteiros positivos; confirmar frações/unidades e regras por duração | Antes de edição e geração; Gabriel |
-| Q05 | Reaproveitamento | Reiniciar conclusão na nova viagem, preservar itens personalizados e sua privacidade | Antes de duplicação; Gabriel |
-| Q06 | Sugestões rejeitadas | Na primeira simulação, decisões pertencem à revisão atual. Memória entre viagens requer decisão separada | Antes de adaptação; Gabriel |
-| Q07 | Itens personalizados | Evitar remoção/ajuste automático; propostas devem identificar o item e explicar o motivo | Antes do motor local; Gabriel |
-| Q08 | Identificação para texto/JPG | Não exigir conta por extensão da regra de links sem confirmação | Design do compartilhamento; Gabriel |
-| Q09 | Atualização de links | Demonstrar versão publicada e alterações pendentes; não escolher automática vs. manual para produto real | Protótipo com Gabriel; infraestrutura com Bruno |
-| Q10 | Persistência para testes | Permanecer em memória; adicionar armazenamento somente por necessidade explícita dos testes | Antes de testes longitudinais; Gabriel e Bruno |
-| Q11 | Expo Router | Avaliar após mapa de fluxos; rotas finas com telas nas features | Antes de navegação; Gabriel/desenvolvimento |
-| Q12 | Versões preliminares | Revisar risco e compatibilidade da base atual antes de desenvolver telas | Antes da UI; desenvolvimento/Bruno |
-| Q13 | Festival e datas | Definir papel de nome, datas e identificação; não exigir cadastro real de festivais | Design do quiz e listas; Gabriel |
-| Q14 | Essenciais/opcionais | Não criar classificação obrigatória antes de validar sua utilidade | Conteúdo e design; Gabriel |
-| Q15 | Desfazer e cancelamento | Definir exclusão, retorno durante quiz e saída de revisão com propostas pendentes | Design dos estados; Gabriel |
+| Q01 | Default visibility | Privacy should be a clear choice; do not infer it from category names | Before privacy and sharing; Gabriel |
+| Q02 | Item exceptions | `inherit` follows the category; `visible`/`hidden` override it. Show the decision's origin | Before implementing the public projection; Gabriel |
+| Q03 | Quiz fields | Define days/nights, values, required answers, unknown answers, and returning without losing answers | Quiz design; Gabriel |
+| Q04 | Quantities | Start with positive integers; confirm fractions/units and duration rules | Before editing and generation; Gabriel |
+| Q05 | Reuse | Reset completion for the new trip; preserve custom items and their privacy | Before duplication; Gabriel |
+| Q06 | Rejected suggestions | In the first simulation, decisions belong to the current review. Memory across trips requires a separate decision | Before adaptation; Gabriel |
+| Q07 | Custom items | Avoid automatic removal/adjustment; proposals should identify the item and explain the reason | Before the local rule engine; Gabriel |
+| Q08 | Identification for text/JPG | Do not extend the link account requirement without confirmation | Sharing design; Gabriel |
+| Q09 | Link updates | Demonstrate published versions and pending changes; do not choose automatic vs. manual for the real product | Prototype with Gabriel; infrastructure with Bruno |
+| Q10 | Persistence for testing | Stay in memory; add storage only for an explicit testing need | Before longitudinal testing; Gabriel and Bruno |
+| Q11 | Expo Router | Evaluate after mapping flows; thin routes with screens in features | Before navigation; Gabriel/development |
+| Q12 | Prerelease versions | Review risks and compatibility of the current foundation before developing screens | Before UI; development/Bruno |
+| Q13 | Festival and dates | Define the role of names, dates, and identification; do not require a real festival registry | Quiz and list design; Gabriel |
+| Q14 | Essential/optional | Do not create a required classification before validating its usefulness | Content and design; Gabriel |
+| Q15 | Undo and cancellation | Define deletion, going back during the quiz, and leaving reviews with pending proposals | State design; Gabriel |
 
-## Como tratar questões abertas
+## Handling open questions
 
-### Escolhas temporárias do primeiro bloco
+### Temporary choices for the first block
 
-- Navegação local tipada, sem Expo Router, para home/checklist/editor. Q11 permanece aberta para evolução.
-- Quantidades inteiras de 1 a 999, editadas com stepper conforme referência, como hipótese de demonstração (Q04), sem regras de geração.
-- Salvar confirma o rascunho; cancelar/voltar descarta somente esse rascunho. Exclusão pede confirmação (Q15).
-- Fixtures têm visibilidade explícita e hipotética. Novos itens usam `inherit` como marcador sem executar filtro público; listas vazias de teste usam categorias ocultas. Q01/Q02 não foram resolvidas como política de produto, e não há compartilhamento nesta entrega.
-- NativeWind RC0 alinhado ao peer `react-native-css` RC0 após falha observada na prévia web. Q12 permanece aberta para estabilização antes de distribuição.
+- Typed local navigation without Expo Router for home/checklist/editor. Q11 remains open for evolution.
+- Integer quantities from 1 to 999, edited with a stepper as in the reference, as a demonstration hypothesis (Q04), without generation rules.
+- Saving confirms the draft; canceling/going back discards only that draft. Deletion requires confirmation (Q15).
+- Fixtures have explicit, hypothetical visibility. New items use `inherit` as a marker without executing a public filter; empty test lists use hidden categories. Q01/Q02 have not been resolved as product policy, and this delivery has no sharing.
+- NativeWind RC0 aligned with its `react-native-css` RC0 peer after an observed web preview failure. Q12 remains open for stabilization before distribution.
 
-Não ocultar uma proposta em um default de código. Antes de implementar comportamento dependente, registrar a decisão ou um acordo explicitamente temporário para o cenário demonstrativo. A UI pode avançar em partes independentes, sem transformar a dúvida em bloqueio de todo o projeto.
+Do not hide a proposal in a code default. Before implementing dependent behavior, record the decision or an explicitly temporary agreement for the demonstration scenario. UI work can advance in independent areas without turning uncertainty into a blocker for the entire project.
 
-Escolhas de banco, APIs, autenticação, hospedagem, sincronização e backup ficam fora deste registro de implementação até a avaliação do Bruno. Não inferir essas escolhas a partir dos tipos preliminares.
+Database, API, authentication, hosting, synchronization, and backup choices remain outside this implementation record until Bruno's assessment. Do not infer them from preliminary types.
