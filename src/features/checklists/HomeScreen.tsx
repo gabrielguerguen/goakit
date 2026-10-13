@@ -19,7 +19,7 @@ export function HomeScreen({ lists, onOpen }: { lists: Checklist[]; onOpen: (id:
     {lists.length ? lists.map((list) => {
       const count = progress(list.items);
       return <View key={list.id} className="gap-3">
-        <View className="rounded-lg border border-border p-4 gap-2">
+        <View className="rounded-2xl bg-card p-6 gap-2">
           <Text className={patterns.cardTitle}>{list.title}</Text>
           <Text className={patterns.caption}>{tripDescription(list)}</Text>
           <Text className={patterns.body}>{count.completed} de {count.total} itens concluídos</Text>
@@ -28,7 +28,7 @@ export function HomeScreen({ lists, onOpen }: { lists: Checklist[]; onOpen: (id:
       </View>;
     }) : <>
       <View className="gap-4 py-8">
-        <Text className="text-[22px] leading-[30px] font-semibold text-foreground">Menos coisas na cabeça.</Text>
+        <Text className="text-[24px] leading-[32px] font-app-semibold font-normal text-foreground">Menos coisas na cabeça.</Text>
         <Text className={patterns.body}>Responda algumas perguntas e ajuste a sugestão do seu jeito.</Text>
       </View>
       <Note>Você pode criar e usar suas listas sem conta. Nesta demonstração, os dados duram apenas durante a sessão.</Note>
