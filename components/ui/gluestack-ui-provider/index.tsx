@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { View, ViewProps } from 'react-native';
 import { OverlayProvider } from '@gluestack-ui/core/overlay/creator';
 import { ToastProvider } from '@gluestack-ui/core/toast/creator';
-import { Appearance, ColorSchemeName } from "react-native";
 
 export type ModeType = 'light' | 'dark' | 'system';
 
@@ -14,9 +13,7 @@ export function GluestackUIProvider({
   children?: React.ReactNode;
   style?: ViewProps['style'];
 }) {
-  useEffect(() => {
-    Appearance.setColorScheme(mode as ColorSchemeName);
-  }, [mode]);
+  // Color variables are resolved by the application ThemeProvider.
 
   return (
     <View

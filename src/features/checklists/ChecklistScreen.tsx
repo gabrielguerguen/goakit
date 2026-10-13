@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Pressable, View } from 'react-native';
+import { View } from 'react-native';
 import { Text } from '@/components/ui/text';
 import type { Checklist, ChecklistItem } from '@/src/types';
 import { ChecklistSection, type ItemFilter } from '@/src/components/checklist/ChecklistSection';
@@ -18,18 +18,15 @@ export function ChecklistScreen({ list, onBack, onAdd, onEdit, onToggle }: {
   return <View className="gap-4">
     <BackButton onPress={onBack}>Minhas listas</BackButton>
     <PageHeading title={list.title} description={tripDescription(list)} />
-    <Text className={`${patterns.body} font-semibold`} accessibilityLiveRegion="polite">{count.completed} de {count.total} itens concluídos</Text>
+    <Text className={`${patterns.body} font-app-semibold font-normal`} accessibilityLiveRegion="polite">{count.completed} de {count.total} itens concluídos</Text>
     <View accessibilityRole="progressbar" accessibilityLabel="Preparação concluída"
       accessibilityValue={{ min: 0, max: 100, now: Math.round(count.percent), text: `${count.completed} de ${count.total}` }}
-      className="h-1.5 bg-border rounded overflow-hidden">
-      <View className="h-full bg-primary rounded" style={{ width: `${count.percent}%` }} />
+      className="h-2 border border-border bg-muted rounded-lg overflow-hidden">
+      <View className="h-full bg-primary rounded-lg" style={{ width: `${count.percent}%` }} />
     </View>
     <View className="flex-row flex-wrap gap-2">
-      {(['Todos', 'Pendentes', 'Concluídos'] as const).map((value) => <Pressable key={value} onPress={() => setFilter(value)}
-        accessibilityRole="button" accessibilityState={{ selected: filter === value }}
-        className={`min-h-11 rounded-md p-2 justify-center ${filter === value ? 'bg-border' : 'bg-background'}`}>
-        <Text className={patterns.label}>{value}</Text>
-      </Pressable>)}
+      {(['Todos', 'Pendentes', 'Concluídos'] as const).map((value) => <AppButton key={value}
+        onPress={() => setFilter(value)} secondary={filter !== value} selected={filter === value}>{value}</AppButton>)}
     </View>
     {!list.items.length ? <Note>Sua lista está vazia. Adicione o primeiro item.</Note> : list.categories.map((category) =>
       <ChecklistSection key={category.id} category={category} items={list.items.filter((item) => item.categoryId === category.id)}

@@ -3,6 +3,7 @@ import { BackHandler, KeyboardAvoidingView, Platform, Pressable, ScrollView, Vie
 import { Text } from '@/components/ui/text';
 import { createEmptyChecklist, createExampleChecklists } from '@/src/mocks/checklists';
 import { AppButton, Dialog, Note } from '@/src/components/shared/Controls';
+import { useAppTheme } from '@/src/theme/ThemeProvider';
 import { patterns } from '@/src/theme/patterns';
 import type { ChecklistItem } from '@/src/types';
 import { checklistReducer } from './model';
@@ -16,6 +17,7 @@ let nextId = 0;
 const uniqueId = () => `demo-${Date.now()}-${++nextId}`;
 
 export function ChecklistApp() {
+  const { preference, setPreference } = useAppTheme();
   const [lists, dispatch] = useReducer(checklistReducer, undefined, createExampleChecklists);
   const [route, setRoute] = useState<Route>({ name: 'home' });
   const [controls, setControls] = useState(false);
@@ -49,7 +51,7 @@ export function ChecklistApp() {
   };
   return <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
     <ScrollView ref={scroll} keyboardShouldPersistTaps="handled" contentContainerStyle={{ flexGrow: 1 }}>
-      <View className="w-full max-w-[430px] self-center bg-background px-6 pt-2 pb-6 gap-6 flex-1">
+      <View className="w-full max-w-[430px] self-center bg-background px-6 pt-6 pb-6 gap-6 flex-1">
         {route.name === 'home' ? <HomeScreen lists={lists} onOpen={(listId) => setRoute({ name: 'checklist', listId })} /> : null}
         {route.name === 'checklist' && list ? <ChecklistScreen key={list.id} list={list} onBack={back} onAdd={() => edit()}
           onEdit={edit} onToggle={(itemId) => dispatch({ type: 'toggle-item', listId: list.id, itemId })} /> : null}
@@ -63,10 +65,16 @@ export function ChecklistApp() {
           }} /> : null}
         {feedback ? <View accessibilityLiveRegion="polite"><Note>{feedback}</Note></View> : null}
         {route.name === 'home' ? <View className="border-t border-border pt-4 gap-3">
-          <Pressable accessibilityRole="button" accessibilityState={{ expanded: controls }} onPress={() => setControls((open) => !open)} className="min-h-11 justify-center">
+          <Pressable accessibilityRole="button" accessibilityState={{ expanded: controls }} onPress={() => setControls((open) => !open)} className="min-h-12 justify-center">
             <Text className={patterns.caption}>Demonstração · controles de teste {controls ? '⌃' : '⌄'}</Text>
           </Pressable>
           {controls ? <>
+            <Text className={patterns.label}>Aparência · teste do design system</Text>
+            <View className="flex-row flex-wrap gap-2">
+              {([{ value: 'system', label: 'Sistema' }, { value: 'light', label: 'Claro' }, { value: 'dark', label: 'Escuro' }] as const).map(({ value, label }) =>
+                <AppButton key={value} secondary={preference !== value} selected={preference === value}
+                  onPress={() => setPreference(value)}>{label}</AppButton>)}
+            </View>
             <Note>Dados fictícios em memória. Recarregar o aplicativo restaura os exemplos. Trocar cenário abaixo descarta as edições desta sessão.</Note>
             <AppButton secondary onPress={() => setReset('empty')}>Começar sem listas</AppButton>
             <AppButton secondary onPress={() => setReset('examples')}>Restaurar exemplos</AppButton>

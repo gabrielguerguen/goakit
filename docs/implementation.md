@@ -21,7 +21,9 @@ Quiz, reuse, and sharing are unavailable with an explanation of the next block. 
 
 `src/features/checklists/` separates state/navigation, screens, and the reducer. `src/components/checklist/` contains reusable items and sections. `src/components/shared/` contains buttons, headings, notes, and dialogs. `src/mocks/` creates fresh fixtures on each reset; it is not the final catalog. `src/theme/patterns.ts` collects the scale extracted from Paper, using semantic colors from `global.css` and NativeWind.
 
-Initial scale: title 28/36, card title 20/28, section 18/26, body 16/24, and caption/label 14/22. Horizontal padding 24, main gap 16, control radius 8, minimum button height 48. Smaller interaction targets in the wireframes were enlarged to at least 44; no status bar is drawn because the system supplies the real one.
+The initial wireframe scale below has been superseded by [Refração 0.2](design-system.md), applied to these screens on October 12, 2026.
+
+Original wireframe scale: title 28/36, card title 20/28, section 18/26, body 16/24, and caption/label 14/22. Horizontal padding 24, main gap 16, control radius 8, minimum button height 48. Smaller interaction targets in the wireframes were enlarged to at least 44; no status bar is drawn because the system supplies the real one.
 
 The example's private categories are not an approved policy: there is no public filter in this delivery. Visibility markers are preserved during editing and are not sent anywhere.
 

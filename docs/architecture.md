@@ -8,7 +8,7 @@ Keep NativeWind as the only main styling system in this foundation, without addi
 
 The first block uses local state navigation with typed routes in `ChecklistApp`, including Android back handling. This keeps the flow testable without introducing Expo Router prematurely. Router remains an option for upcoming blocks; it is not installed. `App.tsx` contains only providers and the feature entry point.
 
-During implementation, NativeWind, already resolved as `5.0.0-rc.0`, was pinned alongside its required peer dependency `react-native-css@3.1.0-rc.0`. The legacy `nativewind/babel` preset was removed, keeping the Expo preset and Metro integration; duplicate transformation prevented the web preview from opening. Tokens use the light theme from Paper, without `:root.light`/`:root.dark` selectors that are incompatible with the current native compiler. The styling engine and Expo version were not changed. Reference: [NativeWind v5 installation](https://www.nativewind.dev/v5/getting-started/installation).
+During implementation, NativeWind, already resolved as `5.0.0-rc.0`, was pinned alongside its required peer dependency `react-native-css@3.1.0-rc.0`. The legacy `nativewind/babel` preset was removed, keeping the Expo preset and Metro integration; duplicate transformation prevented the web preview from opening. Refração now uses `VariableContextProvider` to resolve both themes without `:root.light`/`:root.dark` selectors that are incompatible with the current native compiler. See [the design system implementation](design-system.md). The styling engine and Expo version were not changed. Reference: [NativeWind v5 installation](https://www.nativewind.dev/v5/getting-started/installation).
 
 ## Incremental structure
 
@@ -16,7 +16,7 @@ During implementation, NativeWind, already resolved as `5.0.0-rc.0`, was pinned 
 | --- | --- | --- |
 | `App.tsx` | Current entry point | Existing; do not expand it to contain entire flows |
 | `components/ui/` | Installed Gluestack components | Keep the current path to avoid a migration without benefit |
-| `global.css` | Color tokens and NativeWind configuration | Existing; values are not an approved visual identity |
+| `global.css` | Color tokens and NativeWind configuration | Semantic utilities; palette resolved by the Refração ThemeProvider |
 | `src/types/` | Preliminary domain and demonstration types | Added with the foundations |
 | `src/features/` | Screens, state, and presentation logic by feature | First flow in `checklists/` |
 | `src/components/checklist/` | Reusable feature components | Checklist item and section |
@@ -60,7 +60,7 @@ Keep a snapshot of the latest simulated publication separate from the current pe
 
 Reuse existing `Box`, `Text`, `Heading`, `VStack`, `Button`, and provider components. Component candidates after receiving Paper: `ChecklistItem`, `ChecklistSection`, `QuizOption`, and `AdaptationSuggestion`. Create variants when a pattern repeats; avoid implementing everything preemptively.
 
-Map existing semantic roles: `background`/`foreground` for the base, `card` for surfaces, `muted`/`muted-foreground` for secondary content, `primary` for main actions, `border` for outlines, and `destructive` for destructive actions. Current values are provisional. After Paper, document typography, spacing, radii, control dimensions, and states before scattering values across screens.
+Map existing semantic roles: `background`/`foreground` for the base, `card` for surfaces, `muted`/`muted-foreground` for secondary content, `primary` for main actions, `border` for outlines, and `destructive` for destructive actions. The supplied Refração direction is implemented in the existing screens; [tokens and component conventions](design-system.md) document the palette, typography, geometry, and states. Future brand revisions remain possible.
 
 Completion, selection, privacy, focus, disabled, and error states need indicators beyond color. Plan for screen readers, enlarged text, keyboards, touch targets, and deletion confirmation/recovery according to the design. Do not confuse neutral medium-fidelity design with a lack of accessible states.
 

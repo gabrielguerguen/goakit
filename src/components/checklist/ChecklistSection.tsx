@@ -13,12 +13,15 @@ export function ChecklistSection({ category, items, filter, collapsed, onCollaps
   const count = progress(items);
   const visible = items.filter((item) => filter === 'Todos' || (filter === 'Concluídos' ? item.completed : !item.completed));
   if (!items.length) return null;
-  return <View className="gap-1">
+  return <View className="gap-3">
     <Pressable onPress={onCollapse} accessibilityRole="button" accessibilityState={{ expanded: !collapsed }}
       accessibilityLabel={`${category.name}, ${count.completed} de ${count.total} concluídos`}
-      className="flex-row items-center justify-between gap-3 min-h-11">
-      <Text className={`${patterns.section} flex-1`}>{category.name}</Text>
-      <Text className={patterns.caption}>{count.completed} de {count.total} {collapsed ? '⌄' : '⌃'}</Text>
+      className={`flex-row items-center justify-between gap-3 min-h-12 rounded-xl active:bg-muted ${patterns.focus}`}>
+      <View className="flex-1 gap-2">
+        <Text className={patterns.section}>{category.name}</Text>
+        <Text className={patterns.caption}>{count.completed} de {count.total} concluídos</Text>
+      </View>
+      <Text className={`${patterns.body} w-12 text-center`}>{collapsed ? '⌄' : '⌃'}</Text>
     </Pressable>
     {!collapsed && (visible.length ? visible.map((item) => <ChecklistItem key={item.id} item={item}
       onToggle={() => onToggle(item.id)} onEdit={() => onEdit(item)} />)

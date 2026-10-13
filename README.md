@@ -8,6 +8,8 @@ The first UI block was implemented from Paper: My lists, empty states, checklist
 
 The interface uses mock data and in-memory state. The quiz, list reuse, privacy, and sharing are upcoming blocks and are not yet available. There is no backend, persistence, or live integration; Bruno will handle infrastructure later.
 
+The existing screens now use the Refração light/dark design system from Paper. See [tokens, components, and validation limits](docs/design-system.md).
+
 ## Project foundations
 
 - [Product and current scope](docs/product.md)

@@ -14,7 +14,7 @@
 - Expo Router is a proposal, not an installed dependency. Do not migrate the entry point without recording the decision.
 - Consult `components/ui/` before creating components. Keep screens/logic organized by feature, mock data centralized in `src/mocks/` when needed, and types in `src/types/`.
 - Do not put the entire application in `App.tsx`. Do not create backend abstractions or empty folders preemptively.
-- Existing color tokens are in `global.css`; do not duplicate their values in components. The initial Paper scale is in `src/theme/patterns.ts` and `docs/implementation.md`. Prefer semantic roles and reusable variants.
+- Color values live in `src/theme/tokens.ts`; `ThemeProvider` resolves them and `global.css` exposes NativeWind utilities. Do not duplicate values in components. Read `docs/design-system.md` before visual changes; typography and interaction patterns live in `src/theme/patterns.ts`. Use the bundled Inter face utilities and semantic roles.
 
 ## Invariants
 

@@ -52,3 +52,7 @@ Keep the existing Expo + TypeScript + Gluestack + NativeWind setup without a sec
 Do not hide a proposal in a code default. Before implementing dependent behavior, record the decision or an explicitly temporary agreement for the demonstration scenario. UI work can advance in independent areas without turning uncertainty into a blocker for the entire project.
 
 Database, API, authentication, hosting, synchronization, and backup choices remain outside this implementation record until Bruno's assessment. Do not infer them from preliminary types.
+
+## October 12, 2026 — Refração implementation
+
+Gabriel supplied the Paper design system and requested development. Adopt Refração 0.2 for the prototype's existing screens: semantic light/dark themes, bundled Inter, shared typography/geometry, and primary-action gradients. This does not finalize the brand or resolve quiz/privacy behavior. See [implementation details and limits](design-system.md). NativeWind remains the only styling engine. Expo Font and LinearGradient use SDK 57-compatible versions; Expo was patched from 57.0.27 to 57.0.28 because the online compatibility check required it. No SDK migration or other stack upgrade was performed.
